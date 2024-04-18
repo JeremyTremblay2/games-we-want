@@ -1,6 +1,6 @@
 import useGameGeneralData from '../../hooks/useGameGeneralData.js'
 
-import View from './view.jsx'
+import View from './View.jsx'
 
 const GameCards = () => {
 	const topGames = useGameGeneralData();
