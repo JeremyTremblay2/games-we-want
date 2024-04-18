@@ -1,0 +1,14 @@
+p {
+    color: gray;
+    font-size: 1.5em;
+    text-align: center;
+    font-style: italic;
+    margin-top: 20px;
+}
+
+h1 {
+    color: #826c6c;
+    font-size: 2.5em;
+    text-align: center;
+    margin-top: 20px;
+}
