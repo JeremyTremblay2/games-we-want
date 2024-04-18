@@ -1,15 +1,16 @@
-import useGameGeneralData from '../../hooks/useGameGeneralData.js';
+import useGameGeneralData from '../../hooks/useGameGeneralData.js'
 
-import View from './view.jsx';
+import View from './view.jsx'
+import './GameCards.css'
 
 const GameCards = () => {
-	const topGame = useGameGeneralData();
+	const topGames = useGameGeneralData();
 
 	return (
 		<View
-			topGame={topGame}
+			topGames={topGames}
 		/>
-	);
+	)
 }
 
 export default GameCards
