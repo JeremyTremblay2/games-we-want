@@ -3,23 +3,17 @@ import GameCard from '../GameCard';
 import './index.css';
 
 const View = ({ topGames }) => {
-    const rows = [];
-    for (let i = 0; i < topGames.length; i += 2) {
-        const games = topGames.slice(i, i + 2);
-        rows.push(
-            <div className="row" key={i}>
-                {games.map((game, index) => (
-                    <GameCard game={game} key={index} />
-                ))}
-            </div>
-        );
-    }
-
     return (
         <div className="container">
-            {rows}
+            <div className="row">
+                {topGames.map((game, index) => (
+                    <div className="col" key={index}>
+                        <GameCard game={game} />
+                    </div>
+                ))}
+            </div>
         </div>
-    )
+    );
 }
 
 export default View
