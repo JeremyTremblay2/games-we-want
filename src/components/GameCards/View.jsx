@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
-import GameCard from '../GameCard/GameCard';
-import './GameCards.css';
+import GameCard from '../GameCard';
+import './index.css';
 
 const View = ({ topGames }) => {
     const rows = [];

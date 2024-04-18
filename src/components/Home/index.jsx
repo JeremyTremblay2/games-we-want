@@ -1,4 +1,4 @@
-import GameCards from '../GameCards/GameCards'
+import GameCards from '../GameCards'
 
 const Home = () => {
   return (

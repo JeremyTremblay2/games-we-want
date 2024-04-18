@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { API_GAMES_TOP_10} from '../utils/constants'
+import { API_TOP_10_GAMES_URL } from '../utils/constants'
 import moment from 'moment'
 
 const useWeather = () => {
@@ -9,7 +9,7 @@ const useWeather = () => {
 		async function getData() {
 			// API call
 			const result = await fetch(
-				API_GAMES_TOP_10
+				API_TOP_10_GAMES_URL
 			)
 
 			if (!result.ok) {
