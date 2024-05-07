@@ -3,6 +3,7 @@ import { createTheme, CssBaseline, ThemeProvider, useMediaQuery } from "@mui/mat
 import { useMemo } from "react"
 import Home from "../Home/index.jsx"
 import Login from "../Login/index.jsx"
+import Register from "../Register/index.jsx"
 import Layout from "../Layout/index.jsx"
 
 const router = createBrowserRouter([
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />
+      },
+      {
+        path: "/register",
+        element: <Register />
       }
     ]
   }
