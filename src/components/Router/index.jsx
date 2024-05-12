@@ -1,10 +1,10 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { createTheme, CssBaseline, ThemeProvider, useMediaQuery } from "@mui/material"
+import { createTheme, CssBaseline, styled, ThemeProvider, useMediaQuery } from "@mui/material"
 import { useMemo } from "react"
 import Home from "../Home/index.jsx"
 import Login from "../Login/index.jsx"
-import Register from "../Register/index.jsx"
 import Layout from "../Layout/index.jsx"
+import NotificationsProvider from "../Notifications/index.jsx"
 
 const router = createBrowserRouter([
   {
@@ -20,7 +20,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/register",
-        element: <Register />
+        element: <Login isRegister />
       }
     ]
   }
@@ -33,7 +33,10 @@ export default function Router() {
       createTheme({
         palette: {
           mode: prefersDarkMode ? 'dark' : 'light'
-        }
+        },
+        shape: {
+          borderRadius: 15,
+        },
       }),
     [prefersDarkMode]
   )
@@ -41,6 +44,7 @@ export default function Router() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      <NotificationsProvider prefersDarkMode={prefersDarkMode} />
       <RouterProvider router={router} />
     </ThemeProvider>
   )

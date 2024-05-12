@@ -1,3 +1,5 @@
+import { enqueueSnackbar } from "notistack"
+
 const useLogin = async (url, body) => {
   const response = await fetch(
     url,
@@ -10,7 +12,17 @@ const useLogin = async (url, body) => {
     }
   )
   if (!response.ok) {
-    console.error('There was a problem while creating account, please retry.')
+    const error = await response.text()
+    switch (response.status) {
+      case 400:
+        enqueueSnackbar(error, {variant: 'error'})
+        break
+      case 500:
+        enqueueSnackbar('Server error', {variant: 'error'})
+        break
+      default:
+        enqueueSnackbar('Unknown error', {variant: 'error'})
+    }
   } else {
     const jwt = await response.text()
     localStorage.setItem('jwt', jwt)
