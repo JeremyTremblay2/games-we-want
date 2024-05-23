@@ -5,6 +5,7 @@ import moment from 'moment'
 
 const useGameGeneralData = () => {
 	const [topGames, setTopGames] = useState([])
+	const [isLoading, setIsLoading] = useState(true)
 
 	useEffect(() => {
 		async function getData() {
@@ -44,10 +45,12 @@ const useGameGeneralData = () => {
 			setTopGames(gamesList)
 		}
 
-		getData()
+		setIsLoading(true)
+		
+		getData().then(() => setIsLoading(false))
 	}, [])
 
-	return topGames
+	return { topGames, isLoading }
 }
 
 export default useGameGeneralData
