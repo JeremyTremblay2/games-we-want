@@ -6,8 +6,8 @@ const View = ({ topGames }) => {
     return (
         <div className="container">
             <div className="row">
-                {topGames.map((game, index) => (
-                    <div className="col" key={index}>
+                {topGames.map((game) => (
+                    <div className="col" key={game.id}>
                         <GameCard game={game} />
                     </div>
                 ))}
