@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { createTheme, CssBaseline, styled, ThemeProvider, useMediaQuery } from "@mui/material"
 import { useMemo } from "react"
 import Home from "../Home/index.jsx"
+import GameDetails from "../GameDetails/index.jsx"
 import Login from "../Login/index.jsx"
 import Layout from "../Layout/index.jsx"
 import NotificationsProvider from "../Notifications/index.jsx"
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home />
+      },
+      {
+        path: "/game/:gameId",
+        element: <GameDetails/>
       },
       {
         path: "/login",
