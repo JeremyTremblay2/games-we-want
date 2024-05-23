@@ -33,8 +33,8 @@ View.propTypes = {
 
 View.defaultProps = {
     game: {
-        name: 'A random game',
-        description: 'This is a description of a random game.',
-        screenshots: ['https://www.google.com/url?sa=i&url=https%3A%2F%2Funsplash.com%2Fs%2Fphotos%2Frandom&psig=AOvVaw0uBJnF6-c7atYke8rWWR3M&ust=1716541589197000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCPCd-u61o4YDFQAAAAAdAAAAABAE']
+        name: "",
+        description: "",
+        screenshots: []
     }
 }

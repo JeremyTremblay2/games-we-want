@@ -26,9 +26,9 @@ const CenterSlider = ({ children }) => {
 export default CenterSlider;
 
 CenterSlider.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node.isRequired
 }
 
 CenterSlider.defaultProps = {
-  children: [1, 2, 3, 4, 5, 6]
+  children: null
 }
