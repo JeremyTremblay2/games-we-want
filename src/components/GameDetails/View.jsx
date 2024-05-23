@@ -4,7 +4,6 @@ import CenterSlider from '../CenterSlider'
 import './index.css'
 
 const View = ({ game }) => {
-    console.log(game);
     return(
         <div>
             {game && (
