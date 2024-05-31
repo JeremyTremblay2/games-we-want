@@ -5,7 +5,6 @@ const Profile = () => {
 
   const user = useUserInfo()
   const { name, favorites } = user
-  console.log(user)
   return (
     <>
       <h1>{name}</h1>

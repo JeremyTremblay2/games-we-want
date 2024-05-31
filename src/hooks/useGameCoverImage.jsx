@@ -15,11 +15,8 @@ const useGameCoverImage = ({ gameId }) => {
         `${API_BASE_URL}${API_COVER_URL}/${gameId}`
       )
 
-      console.log("screenshot", screenshot)
-
       if (screenshot.ok || screenshot.status === 200) {
         image = (await screenshot.json())?.[0]?.url
-        console.log("image", image)
       }
       if (!image) {
         image = placeholderImage
