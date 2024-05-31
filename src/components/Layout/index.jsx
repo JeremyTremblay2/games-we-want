@@ -1,16 +1,19 @@
 import { useContext, useEffect, useState } from 'react'
-import AppBar from '@mui/material/AppBar'
-import Box from '@mui/material/Box'
-import Toolbar from '@mui/material/Toolbar'
-import Typography from '@mui/material/Typography'
-import IconButton from '@mui/material/IconButton'
-import AccountCircle from '@mui/icons-material/AccountCircle'
-import MenuItem from '@mui/material/MenuItem'
-import Menu from '@mui/material/Menu'
 import { Link, Outlet, useNavigate } from 'react-router-dom'
-import { Button, Container } from "@mui/material"
+import Menu from '@mui/material/Menu'
+import {
+  AppBar,
+  Toolbar,
+  Button,
+  Container,
+  Typography,
+  MenuItem,
+  IconButton
+} from "@mui/material"
+import AccountCircle from '@mui/icons-material/AccountCircle'
 import { useDisconnect } from "../../hooks/useAuthenticate"
 import { UserContext, useUserInfo } from "../UserContext/index.jsx"
+import ScrollTop from "./ScrollTop"
 
 const Layout = () => {
   const userInfo = useUserInfo()
@@ -31,7 +34,8 @@ const Layout = () => {
     setAnchorEl(event.currentTarget)
   }
 
-  const handleClose = () => {
+  const handleProfile = () => {
+    navigate("/profile")
     setAnchorEl(null)
   }
 
@@ -42,8 +46,9 @@ const Layout = () => {
   }
 
   return (
-    <Box sx={{ display: "grid", gridTemplateRows: "auto 1fr", height: "100vh" }}>
-      <AppBar position="static">
+    // <Box sx={{ display: "grid", gridTemplateRows: "auto 1fr", height: "100vh" }}>
+    <>
+      <AppBar position="static" id="top-anchor">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             <Link to="/" style={{ textDecoration: "none", color: "unset" }}>
@@ -75,9 +80,9 @@ const Layout = () => {
                   horizontal: 'right'
                 }}
                 open={Boolean(anchorEl)}
-                onClose={handleClose}
+                onClose={() => setAnchorEl(null)}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                <MenuItem onClick={handleProfile}>Profile</MenuItem>
                 <MenuItem onClick={handleDisconnect}>Disconnect</MenuItem>
               </Menu>
             </div>) : (
@@ -85,10 +90,11 @@ const Layout = () => {
           )}
         </Toolbar>
       </AppBar>
-      <Container maxWidth="lg" sx={{ paddingTop: "20px" }}>
+      <Container maxWidth="xl" sx={{ paddingTop: "20px" }}>
         <Outlet />
       </Container>
-    </Box>
+      <ScrollTop />
+    </>
   )
 }
 
