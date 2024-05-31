@@ -8,6 +8,7 @@ import GameDetails from "../GameDetails/index.jsx"
 import Login from "../Login/index.jsx"
 import PrivateRoute from "./PrivateRoute.jsx"
 import { UserContextProvider } from "../UserContext/index.jsx"
+import Profile from "../Profile/index.jsx"
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <GameDetails />
+          </PrivateRoute>
+        )
+      },
+      {
+        path: "/profile",
+        element: (
+          <PrivateRoute>
+            <Profile />
           </PrivateRoute>
         )
       },

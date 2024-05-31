@@ -5,9 +5,12 @@
     gap: 10px;
 }
 
-.row {
+.cards-list {
     width: 100%;
-    display: grid;
+    justify-content: center;
+    justify-items: center;
+    display: flex;
+    flex-wrap: wrap;
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    gap: 25px;
 }
