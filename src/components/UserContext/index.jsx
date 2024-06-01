@@ -27,6 +27,12 @@ export function useRefreshUserData() {
   setRefreshUser(true)
 }
 
+export function useUserIsLoading() {
+  const { isLoading } = useContext(UserContext)
+  return isLoading
+}
+
+
 UserContextProvider.propTypes = {
   children: PropTypes.node.isRequired
 }

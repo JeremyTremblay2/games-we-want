@@ -4,7 +4,8 @@ import { API_BASE_URL, API_USER_INFO } from "../utils/constants.js"
 
 const useUserData = () => {
   const [userInfo, setUserInfo] = useState(undefined)
-  const [refreshUser, setRefreshUser] = useState(true) // setRefreshUser(Date.now())
+  const [isLoading, setIsLoading] = useState(true)
+  const [refreshUser, setRefreshUser] = useState(true)
 
   useEffect(() => {
     if (refreshUser) {
@@ -19,6 +20,7 @@ const useUserData = () => {
   }, [refreshUser])
 
   async function getUserInfo(jwt) {
+    setIsLoading(true)
     const response = await fetch(
       `${API_BASE_URL}${API_USER_INFO}`,
       {
@@ -47,11 +49,12 @@ const useUserData = () => {
     } else {
       const data = await response.json()
       setUserInfo(data)
+      setIsLoading(false)
     }
   }
 
 
-  return { userInfo, setRefreshUser }
+  return { userInfo, isLoading, setRefreshUser }
 }
 
 export default useUserData

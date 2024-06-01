@@ -52,7 +52,7 @@ const View = ({ game, isLoading, image, isImageLoading }) => {
             }}
           >
             {isLoading ? (
-              <Skeleton />
+              <Skeleton animation="wave" />
             ) : (
               game.name
             )}
@@ -67,7 +67,7 @@ const View = ({ game, isLoading, image, isImageLoading }) => {
             }}
           >
             {isLoading ? (
-              <Skeleton width={"50%"} sx={{marginLeft: "auto"}} />
+              <Skeleton width={"50%"} animation="wave" sx={{ marginLeft: "auto" }} />
             ) : (
               `Released on ${moment(game.firstReleaseDate).format('L')}`
             )}

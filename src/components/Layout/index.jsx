@@ -13,7 +13,9 @@ import {
 import AccountCircle from '@mui/icons-material/AccountCircle'
 import { useDisconnect } from "../../hooks/useAuthenticate"
 import { UserContext, useUserInfo } from "../UserContext/index.jsx"
+import { useIsLoading } from "../LoadingContext/index.jsx"
 import ScrollTop from "./ScrollTop"
+import LinearProgress from "@mui/material/LinearProgress"
 
 const Layout = () => {
   const userInfo = useUserInfo()
@@ -22,6 +24,7 @@ const Layout = () => {
   const navigate = useNavigate()
 
   const userContext = useContext(UserContext)
+  const { isLoading } = useIsLoading()
 
   useEffect(() => {
     if (userInfo === null) {
@@ -46,7 +49,6 @@ const Layout = () => {
   }
 
   return (
-    // <Box sx={{ display: "grid", gridTemplateRows: "auto 1fr", height: "100vh" }}>
     <>
       <AppBar position="static" id="top-anchor">
         <Toolbar>
@@ -90,6 +92,9 @@ const Layout = () => {
           )}
         </Toolbar>
       </AppBar>
+      {isLoading && (
+        <LinearProgress style={{ width: "100%" }} />
+      )}
       <Container maxWidth="xl" sx={{ paddingTop: "20px" }}>
         <Outlet />
       </Container>

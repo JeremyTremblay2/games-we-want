@@ -8,6 +8,7 @@ const useGameCoverImage = ({ gameId }) => {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
+    if (!gameId) return
     async function getData() {
 
       let image = null

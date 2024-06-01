@@ -9,10 +9,15 @@ import Login from "../Login/index.jsx"
 import PrivateRoute from "./PrivateRoute.jsx"
 import { UserContextProvider } from "../UserContext/index.jsx"
 import Profile from "../Profile/index.jsx"
+import { LoadingContextProvider } from "../LoadingContext/index.jsx"
 
 const router = createBrowserRouter([
   {
-    element: <Layout />,
+    element: (
+      <LoadingContextProvider>
+        <Layout />
+      </LoadingContextProvider>
+    ),
     children: [
       {
         path: '/',
