@@ -34,6 +34,11 @@ GameCard.propTypes = {
 }
 
 GameCard.defaultProps = {
-  game: {},
+  game: {
+    id: 'default-id',
+    name: 'Default Game',
+    image: 'https://via.placeholder.com/350x150',
+    firstReleaseDate: '2022-01-01'
+  },
   isLoading: false
 }
