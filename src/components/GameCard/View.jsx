@@ -7,7 +7,7 @@ import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 
 import './index.css'
-import { Skeleton } from "@mui/lab"
+import { Skeleton } from "@mui/material"
 import moment from "moment/moment.js"
 
 const View = ({ game, isLoading, image, isImageLoading }) => {

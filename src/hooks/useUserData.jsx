@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { enqueueSnackbar } from "notistack"
-import { API_BASE_URL, API_USER_INFO } from "../utils/constants.js"
+import { API_BASE_URL, API_USER_DELETE, API_USER_INFO } from "../utils/constants.js"
+import { handleDisconnect } from "./useAuthenticate.jsx"
 
 const useUserData = () => {
   const [userInfo, setUserInfo] = useState(undefined)
@@ -14,6 +15,7 @@ const useUserData = () => {
         getUserInfo(jwt)
       } else {
         setUserInfo(null)
+        setIsLoading(false)
       }
       setRefreshUser(false)
     }
@@ -31,9 +33,12 @@ const useUserData = () => {
         }
       }
     )
-    if (!response.ok) {
+    if (!response.ok || response.status === 204) {
       const error = await response.text()
       switch (response.status) {
+        case 204:
+          setUserInfo(null)
+          break
         case 400:
           enqueueSnackbar(error, { variant: 'error' })
           break
@@ -49,12 +54,12 @@ const useUserData = () => {
     } else {
       const data = await response.json()
       setUserInfo(data)
-      setIsLoading(false)
     }
+    setIsLoading(false)
   }
 
 
-  return { userInfo, isLoading, setRefreshUser }
+  return { userInfo, setUserInfo, isLoading, setRefreshUser }
 }
 
 export default useUserData

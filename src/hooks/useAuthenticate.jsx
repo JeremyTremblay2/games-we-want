@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react"
 import { enqueueSnackbar } from "notistack"
-import { API_BASE_URL, API_USER_LOGIN, API_USER_REGISTER, API_USER_RENEW_TOKEN } from "../utils/constants.js"
-import { useRefreshUserData } from "../components/UserContext/index.jsx"
+import {
+  API_BASE_URL,
+  API_USER_DELETE,
+  API_USER_LOGIN,
+  API_USER_REGISTER,
+  API_USER_RENEW_TOKEN
+} from "../utils/constants.js"
+import { useRefreshUserData } from "../components/UserContext"
 
 export const useAuthenticate = (body, isRegister) => {
   const [isAuthenticated, setIsAuthenticated] = useState(null)
@@ -100,7 +106,7 @@ export const useRenewToken = async (body) => {
   }
 }
 
-export const useDisconnect = (navigate) => {
+export const handleDisconnect = (navigate) => {
   clearTimeout(tokenTimeout)
   localStorage.removeItem('jwt')
   return navigate('/login')

@@ -1,6 +1,6 @@
 import { Box, Fab, useScrollTrigger } from "@mui/material"
 import Fade from "@mui/material/Fade"
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp.js"
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp"
 
 const ScrollTop = () => {
   const trigger = useScrollTrigger({

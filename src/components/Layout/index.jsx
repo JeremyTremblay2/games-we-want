@@ -11,7 +11,7 @@ import {
   IconButton
 } from "@mui/material"
 import AccountCircle from '@mui/icons-material/AccountCircle'
-import { useDisconnect } from "../../hooks/useAuthenticate"
+import { handleDisconnect } from "../../hooks/useAuthenticate"
 import { UserContext, useUserInfo } from "../UserContext/index.jsx"
 import { useIsLoading } from "../LoadingContext/index.jsx"
 import ScrollTop from "./ScrollTop"
@@ -37,14 +37,14 @@ const Layout = () => {
     setAnchorEl(event.currentTarget)
   }
 
-  const handleProfile = () => {
+  const handleClickProfile = () => {
     navigate("/profile")
     setAnchorEl(null)
   }
 
-  const handleDisconnect = () => {
+  const handleClickDisconnect = () => {
     setAnchorEl(null)
-    useDisconnect(navigate)
+    handleDisconnect(navigate)
     userContext.setRefreshUser(true)
   }
 
@@ -84,8 +84,8 @@ const Layout = () => {
                 open={Boolean(anchorEl)}
                 onClose={() => setAnchorEl(null)}
               >
-                <MenuItem onClick={handleProfile}>Profile</MenuItem>
-                <MenuItem onClick={handleDisconnect}>Disconnect</MenuItem>
+                <MenuItem onClick={handleClickProfile}>Profile</MenuItem>
+                <MenuItem onClick={handleClickDisconnect}>Disconnect</MenuItem>
               </Menu>
             </div>) : (
             <Button color="inherit" onClick={() => navigate("/login")}>Login</Button>

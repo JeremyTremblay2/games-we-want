@@ -6,6 +6,7 @@ import { Container, FormHelperText, TextField } from "@mui/material"
 import LoadingButton from "@mui/lab/LoadingButton"
 import "./index.css"
 import { UserContext, useRefreshUserData } from "../UserContext/index.jsx"
+import { enqueueSnackbar } from "notistack"
 
 const Login = ({ isRegister }) => {
   const navigate = useNavigate()
@@ -29,6 +30,9 @@ const Login = ({ isRegister }) => {
     if (isAuthenticated) {
       navigate("/")
       userContext.setRefreshUser(true)
+      if (isRegister) {
+        enqueueSnackbar("Your account has been successfully created", { variant: "success" })
+      }
     } else if (!isAuthenticating && isAuthenticated === false) {
       setIsError({
         username: true,
@@ -94,7 +98,7 @@ const Login = ({ isRegister }) => {
         password: false,
         text: false
       })
-      isAuthenticating(true)
+      setIsAuthenticating(true)
     }
   }
 

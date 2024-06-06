@@ -18,7 +18,7 @@ const PrivateRoute = ({ children }) => {
     return null
   }
 
-  if (!userInfo || !localStorage.getItem('jwt')) {
+  if (!userInfo) {
     return <Navigate to="/login" replace />
   }
 

@@ -4,12 +4,10 @@ import './index.css'
 
 const View = ({ gamesList, isLoading }) => {
   return (
-    <div className="container">
-      <div className="cards-list">
-        {gamesList.map((game) => (
-          <GameCard key={game.id} game={game} isLoading={isLoading} />
-        ))}
-      </div>
+    <div className="cards-list">
+      {gamesList.map((game) => (
+        <GameCard key={game.id} game={game} isLoading={isLoading} />
+      ))}
     </div>
   )
 }
