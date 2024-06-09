@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import propTypes from "prop-types"
-import { Container, TextField, FormHelperText } from "@mui/material"
+import { useAuthenticate } from "../../hooks/useAuthenticate"
+import { Link, useNavigate } from "react-router-dom"
+import { Container, FormHelperText, TextField } from "@mui/material"
 import LoadingButton from "@mui/lab/LoadingButton"
-import { API_BASE_URL, API_USER_LOGIN, API_USER_REGISTER } from "../../utils/constants"
-import useLogin from "../../hooks/useLogin"
-import { useNavigate, Link } from "react-router-dom"
 import "./index.css"
+import { UserContext, useRefreshUserData } from "../UserContext/index.jsx"
 
-const Login = ({isRegister}) => {
+const Login = ({ isRegister }) => {
+  const navigate = useNavigate()
+
   const [user, setUser] = useState({
     username: "",
     password: "",
@@ -19,11 +21,23 @@ const Login = ({isRegister}) => {
     confirmationPassword: false,
     text: false
   })
-  const [isLoading, setIsLoading] = useState(false)
 
-  const API_URL = isRegister ? API_USER_REGISTER : API_USER_LOGIN
+  const userContext = useContext(UserContext)
 
-  const navigate = useNavigate()
+  const { isAuthenticated, isAuthenticating, setIsAuthenticating } = useAuthenticate(user, isRegister)
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/")
+      userContext.setRefreshUser(true)
+    } else if (!isAuthenticating && isAuthenticated === false) {
+      setIsError({
+        username: true,
+        password: true,
+        text: true
+      })
+    }
+  }, [isAuthenticated, isAuthenticating])
+
 
   const handleChange = (e) => {
     setUser((prev) => ({
@@ -52,19 +66,7 @@ const Login = ({isRegister}) => {
         password: false,
         text: false
       })
-      setIsLoading(true)
-      const response = await useLogin(`${API_BASE_URL}${API_USER_LOGIN}`, user)
-
-      setIsLoading(false)
-      if (response) {
-        navigate("/")
-      } else {
-        setIsError({
-          username: true,
-          password: true,
-          text: true
-        })
-      }
+      setIsAuthenticating(true)
     }
   }
 
@@ -92,32 +94,21 @@ const Login = ({isRegister}) => {
         password: false,
         text: false
       })
-      setIsLoading(true)
-      const response = await useLogin(`${API_BASE_URL}${API_USER_REGISTER}`, user)
-      setIsLoading(false)
-      if (response) {
-        navigate("/")
-      } else {
-        setIsError({
-          username: true,
-          password: true,
-          text: true
-        })
-      }
+      isAuthenticating(true)
     }
   }
 
-  const signInUpString = isRegister ? "Inscription" : "Connexion"
+  const signInUpString = isRegister ? "Sign Up" : "Sign In"
 
   return (
-    <div style={{maxHeight: "100%"}}>
+    <div style={{ maxHeight: "100%" }}>
       <Container>
         <form onSubmit={isRegister ? handleRegister : handleLogin} method="post">
           <h1>{signInUpString}</h1>
           <TextField
             error={isError.username}
             name="username"
-            label="Identifiant"
+            label="Username"
             value={user.username}
             onChange={handleChange}
             fullWidth
@@ -126,7 +117,7 @@ const Login = ({isRegister}) => {
             error={isError.password}
             type="password"
             name="password"
-            label="Mot de passe"
+            label="Password"
             value={user.password}
             onChange={handleChange}
             fullWidth
@@ -147,11 +138,11 @@ const Login = ({isRegister}) => {
             (
               <FormHelperText error>Votre identifiant ou mot de passe est incorrect</FormHelperText>
             )}
-          <LoadingButton type="submit" variant="contained" loading={isLoading}>{signInUpString}</LoadingButton>
+          <LoadingButton type="submit" variant="contained" loading={isAuthenticating}>{signInUpString}</LoadingButton>
           {isRegister ? (
-            <p>Vous avez déjà un compte ? <Link to="/login">Connectez-vous</Link></p>
+            <p>You already have an account? <Link to="/login">Sign In</Link></p>
           ) : (
-            <p>Vous n'avez pas de compte ? <Link to="/register">Inscrivez-vous</Link></p>
+            <p>You don’t have an account? <Link to="/register">Sign Up</Link></p>
           )}
         </form>
       </Container>

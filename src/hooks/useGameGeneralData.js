@@ -3,8 +3,9 @@ import { API_TOP_10_GAMES_URL, API_SCREENSHOTS_URL, API_BASE_URL } from '../util
 import game_image from '../assets/images/game_image_placeholder.png'
 import moment from 'moment'
 
-const useWeather = () => {
+const useGameGeneralData = () => {
 	const [topGames, setTopGames] = useState([])
+	const [isLoading, setIsLoading] = useState(true)
 
 	useEffect(() => {
 		async function getData() {
@@ -26,8 +27,7 @@ const useWeather = () => {
 				const screenshot = await fetch(
 					`${API_BASE_URL}${API_SCREENSHOTS_URL}/${data[i].id}`
 				)
-				console.log(screenshot)
-				console.log(`${API_BASE_URL}${API_SCREENSHOTS_URL}/${data[i].id}`)
+				
 				if (screenshot.ok && screenshot.status === 200) {
 					image = (await screenshot.json())[0].url
 				}
@@ -35,6 +35,7 @@ const useWeather = () => {
 					image = game_image
 				}
 				gamesList.push({
+					id: data[i].id,
 					image: image,
                     firstReleaseDate: moment(data[i].firstReleaseDate).format('L'),
                     name: data[i].name
@@ -44,10 +45,12 @@ const useWeather = () => {
 			setTopGames(gamesList)
 		}
 
-		getData()
+		setIsLoading(true)
+		
+		getData().then(() => setIsLoading(false))
 	}, [])
 
-	return topGames
+	return { topGames, isLoading }
 }
 
-export default useWeather
+export default useGameGeneralData
