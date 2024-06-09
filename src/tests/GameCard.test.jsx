@@ -25,7 +25,7 @@ test('renders game release date', () => {
     id: 1,
     name: 'Sample Game',
     image: 'sample-image.jpg',
-    firstReleaseDate: '2022-01-01',
+    firstReleaseDate: '2022-01-30',
   };
 
   render(
@@ -34,7 +34,7 @@ test('renders game release date', () => {
     </BrowserRouter>
   );
 
-  const releaseDateElement = screen.getByText('Released on 2022-01-01');
+  const releaseDateElement = screen.getByText('Released on 2022-01-30');
   expect(releaseDateElement).toBeInTheDocument();
 });
 

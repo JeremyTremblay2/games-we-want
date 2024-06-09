@@ -5,10 +5,9 @@ import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
-
 import './index.css'
 import { Skeleton } from "@mui/material"
-import moment from "moment/moment.js"
+import dayjs from "dayjs"
 
 const View = ({ game, isLoading, image, isImageLoading }) => {
   return (
@@ -69,7 +68,7 @@ const View = ({ game, isLoading, image, isImageLoading }) => {
             {isLoading ? (
               <Skeleton width={"50%"} animation="wave" sx={{ marginLeft: "auto" }} />
             ) : (
-              `Released on ${moment(game.firstReleaseDate).format('L')}`
+              `Released on ${dayjs(game.firstReleaseDate).format("YYYY-MM-DD")}`
             )}
           </Typography>
         </CardContent>
