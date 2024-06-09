@@ -15,7 +15,7 @@ jobs:
         node-version: [20.x]
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install Node ${{ matrix.node-version }}
         uses: actions/setup-node@v3
@@ -43,7 +43,7 @@ jobs:
         node-version: [20.x]
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install Node ${{ matrix.node-version }}
         uses: actions/setup-node@v3
