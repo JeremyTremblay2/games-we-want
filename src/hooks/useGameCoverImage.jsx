@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { API_BASE_URL, API_COVER_URL } from '../utils/constants'
 import placeholderImage from '../assets/images/game_image_placeholder.png'
-import moment from 'moment'
 
 const useGameCoverImage = ({ gameId }) => {
   const [gameCoverImage, setGameCoverImage] = useState(null)

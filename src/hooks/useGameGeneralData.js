@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { API_TOP_10_GAMES_URL, API_SCREENSHOTS_URL, API_BASE_URL } from '../utils/constants'
 import game_image from '../assets/images/game_image_placeholder.png'
-import moment from 'moment'
 
 const useGameGeneralData = () => {
 	const [topGames, setTopGames] = useState([])
