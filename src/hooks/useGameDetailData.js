@@ -24,8 +24,11 @@ const useGameDetailData = (gameId) => {
       );
 
       if (!result.ok) {
-        enqueueSnackbar("There was a problem while collecting the game data, please retry.", {variant: "error"})
-        throw "There was a problem while collecting the game data, please retry."
+        enqueueSnackbar(
+          "There was a problem while collecting the game data, please retry.",
+          { variant: "error" }
+        );
+        throw "There was a problem while collecting the game data, please retry.";
       }
 
       const data = await result.json();
@@ -42,15 +45,23 @@ const useGameDetailData = (gameId) => {
       );
 
       if (!imageResults.ok) {
-        enqueueSnackbar("There was a problem while collecting screenshots of the game, please retry.", {variant: "error"})
+        enqueueSnackbar(
+          "There was a problem while collecting screenshots of the game, please retry.",
+          { variant: "error" }
+        );
         return {
           name: data.name,
-          description: data.summary
-        }
+          description: data.summary,
+        };
       }
 
-      const imageResultsData = await imageResults.json();
+      let imageResultsData = [];
 
+      try {
+        imageResultsData = await imageResults.json();
+      } catch (error) {
+        console.warn("Failed to get images for the game", gameId);
+      }
       const screenshots = imageResultsData.map((screenshot) => {
         return screenshot.url;
       });

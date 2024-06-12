@@ -1,55 +1,58 @@
-import { useContext, useEffect, useState } from "react";
-import { Link, Outlet, useNavigate } from "react-router-dom";
-import Menu from "@mui/material/Menu";
-import {
-  AppBar,
-  Toolbar,
-  Button,
-  Container,
-  Typography,
-  MenuItem,
-  IconButton,
-} from "@mui/material";
-import Box from "@mui/material/Box";
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import InputBase from "@mui/material/InputBase";
-import SearchIcon from "@mui/icons-material/Search";
-import { handleDisconnect } from "../../hooks/useAuthenticate";
-import { UserContext, useUserInfo } from "../UserContext/index.jsx";
-import { useIsLoading } from "../LoadingContext/index.jsx";
-import ScrollTop from "./ScrollTop";
-import LinearProgress from "@mui/material/LinearProgress";
-import { Margin } from "@mui/icons-material";
+import { useContext, useEffect, useState } from "react"
+import { Link, Outlet, useNavigate } from "react-router-dom"
+import Menu from "@mui/material/Menu"
+import { AppBar, Toolbar, Button, Container, Typography, MenuItem, IconButton } from "@mui/material"
+import Box from "@mui/material/Box"
+import AccountCircle from "@mui/icons-material/AccountCircle"
+import InputBase from "@mui/material/InputBase"
+import SearchIcon from "@mui/icons-material/Search"
+import { handleDisconnect } from "../../hooks/useAuthenticate"
+import { UserContext, useUserInfo } from "../UserContext/index.jsx"
+import { useIsLoading } from "../LoadingContext/index.jsx"
+import ScrollTop from "./ScrollTop"
+import LinearProgress from "@mui/material/LinearProgress"
+import { SearchContext } from "../SearchContext/index.jsx"
 
 const Layout = () => {
-  const userInfo = useUserInfo();
-  const [anchorEl, setAnchorEl] = useState(null);
+  const userInfo = useUserInfo()
+  const [anchorEl, setAnchorEl] = useState(null)
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  const userContext = useContext(UserContext);
-  const { isLoading } = useIsLoading();
+  const userContext = useContext(UserContext)
+  const { isLoading } = useIsLoading()
+
+  const { searchTerm, setSearchTerm, setIsSearching } = useContext(SearchContext)
 
   useEffect(() => {
     if (userInfo === null) {
-      userContext.setRefreshUser(true);
+      userContext.setRefreshUser(true)
     }
-  }, [userInfo]);
+  }, [userInfo])
 
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+  const handleMenu = event => {
+    setAnchorEl(event.currentTarget)
+  }
 
   const handleClickProfile = () => {
-    navigate("/profile");
-    setAnchorEl(null);
-  };
+    navigate("/profile")
+    setAnchorEl(null)
+  }
 
   const handleClickDisconnect = () => {
-    setAnchorEl(null);
-    handleDisconnect(navigate);
-    userContext.setRefreshUser(true);
-  };
+    setAnchorEl(null)
+    handleDisconnect(navigate)
+    userContext.setRefreshUser(true)
+  }
+
+  const handleSearchChange = event => {
+    setSearchTerm(event.target.value)
+  }
+
+  const handleValidateSearch = e => {
+    e.preventDefault()
+    setIsSearching(true)
+  }
 
   return (
     <>
@@ -62,12 +65,12 @@ const Layout = () => {
               </Link>
             </Typography>
             {userInfo ? (
-              <div
-                style={{ display: "flex", alignItems: "center", flexGrow: 1 }}
-              >
-                <Box
-                  sx={{
+              <div style={{ display: "flex", alignItems: "center", flexGrow: 1 }}>
+                <form
+                  onSubmit={handleValidateSearch}
+                  style={{
                     display: "flex",
+                    flexDirection: "row",
                     alignItems: "center",
                     borderRadius: "50px",
                     backgroundColor: "rgba(255, 255, 255, 0.15)",
@@ -75,12 +78,14 @@ const Layout = () => {
                       backgroundColor: "rgba(255, 255, 255, 0.25)",
                     },
                     padding: "0 10px",
-                    margin: "auto",
+                    gap: 0,
                     flexGrow: 0.3,
+                    margin: "auto",
                   }}
                 >
                   <SearchIcon sx={{ fontSize: 22 }} />
                   <InputBase
+                    name="search"
                     placeholder="Search…"
                     inputProps={{ "aria-label": "search" }}
                     sx={{
@@ -88,8 +93,10 @@ const Layout = () => {
                       paddingLeft: "6px",
                       flexGrow: 1,
                     }}
+                    onChange={handleSearchChange}
+                    value={searchTerm}
                   />
-                </Box>
+                </form>
                 <div style={{ alignItems: "end" }}>
                   <IconButton
                     size="large"
@@ -117,9 +124,7 @@ const Layout = () => {
                     onClose={() => setAnchorEl(null)}
                   >
                     <MenuItem onClick={handleClickProfile}>Profile</MenuItem>
-                    <MenuItem onClick={handleClickDisconnect}>
-                      Disconnect
-                    </MenuItem>
+                    <MenuItem onClick={handleClickDisconnect}>Disconnect</MenuItem>
                   </Menu>
                 </div>
               </div>
@@ -137,7 +142,7 @@ const Layout = () => {
       </Container>
       <ScrollTop />
     </>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout

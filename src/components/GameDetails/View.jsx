@@ -1,40 +1,44 @@
-import PropTypes from 'prop-types'
-import CenterSlider from '../CenterSlider'
+import PropTypes from "prop-types";
+import CenterSlider from "../CenterSlider";
 
-import './index.css'
+import "./index.css";
 
 const View = ({ game }) => {
-    return(
+  return (
+    <div>
+      {game && (
         <div>
-            {game && (
-                <div>
-                    <h1>{game.name}</h1>
-                    <p>{game.description}</p>
-                    <div>
-                        {game.screenshots && game.screenshots.length > 0 && (
-                            <CenterSlider>
-                                {game.screenshots.map((screenshot, index) => (
-                                    <img key={index} src={screenshot} alt={`Screenshot ${index + 1}`} />
-                                ))}
-                            </CenterSlider>
-                        )}
-                    </div>
-                </div>
+          <h1>{game.name}</h1>
+          <p>{game.description}</p>
+          <div>
+            {game.screenshots && game.screenshots.length > 0 && (
+              <CenterSlider>
+                {game.screenshots?.map((screenshot, index) => (
+                  <img
+                    key={index}
+                    src={screenshot}
+                    alt={`Screenshot ${index + 1}`}
+                  />
+                ))}
+              </CenterSlider>
             )}
+          </div>
         </div>
-    )
-}
+      )}
+    </div>
+  );
+};
 
-export default View
+export default View;
 
-View.propTypes = { 
-    game: PropTypes.object
-}
+View.propTypes = {
+  game: PropTypes.object,
+};
 
 View.defaultProps = {
-    game: {
-        name: "",
-        description: "",
-        screenshots: []
-    }
-}
+  game: {
+    name: "",
+    description: "",
+    screenshots: [],
+  },
+};
