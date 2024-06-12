@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { Button } from "@mui/material"
-import DeleteIcon from '@mui/icons-material/Delete'
+import DeleteIcon from "@mui/icons-material/Delete"
 import { useFavoriteGames, useUserInfo } from "../UserContext"
-import GameCards from "../GameCards/View"
+import GameCards from "../GameCards"
 import "./index.css"
 import useDeleteAccount from "../../hooks/useDeleteAccount"
 
@@ -26,8 +26,15 @@ const Profile = () => {
         </>
       )}
       <h2>Manage Account</h2>
-      <Button onClick={() => setIsDeletingAccount(true)} variant="contained" color="error" startIcon={<DeleteIcon />}
-              size="large">Delete Account</Button>
+      <Button
+        onClick={() => setIsDeletingAccount(true)}
+        variant="contained"
+        color="error"
+        startIcon={<DeleteIcon />}
+        size="large"
+      >
+        Delete Account
+      </Button>
     </div>
   )
 }

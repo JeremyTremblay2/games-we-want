@@ -1,20 +1,25 @@
-import useGameGeneralData from "../../hooks/useGameGeneralData.js"
-import View from "./View.jsx"
-import GameCardsLoading from "./GameCardsLoading.jsx"
-import './index.css'
+import PropTypes from "prop-types"
+import GameCard from "../GameCard"
+import "./index.css"
 
-const GameCards = () => {
-  const { topGames, isLoading } = useGameGeneralData()
-
+const View = ({ gamesList, isLoading }) => {
   return (
-    <>
-      {isLoading ? (
-        <GameCardsLoading itemNumber={10} />
-      ) : (
-        <View gamesList={topGames} isLoading={isLoading} />
-      )}
-    </>
+    <div className="cards-list">
+      {gamesList?.map(game => (
+        <GameCard key={game.id} game={game} isLoading={isLoading} />
+      ))}
+    </div>
   )
 }
 
-export default GameCards
+export default View
+
+View.propTypes = {
+  gamesList: PropTypes.arrayOf(PropTypes.object),
+  isLoading: PropTypes.bool,
+}
+
+View.defaultProps = {
+  gamesList: [],
+  isLoading: false,
+}

@@ -5,18 +5,16 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp"
 const ScrollTop = () => {
   const trigger = useScrollTrigger({
     disableHysteresis: true,
-    threshold: 800
+    threshold: 800,
   })
 
-  const handleClick = (event) => {
-    const anchor = (event.target.ownerDocument || document).querySelector(
-      '#top-anchor'
-    )
+  const handleClick = event => {
+    const anchor = (event.target.ownerDocument || document).querySelector("#top-anchor")
 
     if (anchor) {
       anchor.scrollIntoView({
-        block: 'center',
-        behavior: 'smooth'
+        block: "center",
+        behavior: "smooth",
       })
     }
   }
@@ -26,7 +24,7 @@ const ScrollTop = () => {
       <Box
         onClick={handleClick}
         role="presentation"
-        sx={{ position: 'fixed', bottom: 16, right: 16 }}
+        sx={{ position: "fixed", bottom: 16, right: 16 }}
       >
         <Fab aria-label="scroll back to top">
           <KeyboardArrowUpIcon />

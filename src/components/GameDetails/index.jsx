@@ -1,9 +1,7 @@
 import { useParams } from "react-router-dom"
-import useGameDetailData from "../../hooks/useGameDetailData.js"
-import LinearProgress from "@mui/material/LinearProgress"
+import useGameDetailData from "../../hooks/useGameDetailData"
 import View from "./View.jsx"
-import { useIsLoading } from "../LoadingContext/index.jsx"
-import { useEffect } from "react"
+import { useIsLoading } from "../LoadingContext"
 
 const GameDetails = () => {
   let { gameId } = useParams()
@@ -12,13 +10,7 @@ const GameDetails = () => {
 
   setIsLoading(isLoading)
 
-  return (
-    <>
-      {!isLoading && (
-        <View game={game} />
-      )}
-    </>
-  )
+  return <>{!isLoading && <View game={game} />}</>
 }
 
 export default GameDetails

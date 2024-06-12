@@ -14,18 +14,21 @@ const Login = ({ isRegister }) => {
   const [user, setUser] = useState({
     username: "",
     password: "",
-    confirmationPassword: isRegister ? "" : undefined
+    confirmationPassword: isRegister ? "" : undefined,
   })
   const [isError, setIsError] = useState({
     username: false,
     password: false,
     confirmationPassword: false,
-    text: false
+    text: false,
   })
 
   const userContext = useContext(UserContext)
 
-  const { isAuthenticated, isAuthenticating, setIsAuthenticating } = useAuthenticate(user, isRegister)
+  const { isAuthenticated, isAuthenticating, setIsAuthenticating } = useAuthenticate(
+    user,
+    isRegister
+  )
   useEffect(() => {
     if (isAuthenticated) {
       navigate("/")
@@ -37,21 +40,20 @@ const Login = ({ isRegister }) => {
       setIsError({
         username: true,
         password: true,
-        text: true
+        text: true,
       })
     }
   }, [isAuthenticated, isAuthenticating])
 
-
-  const handleChange = (e) => {
-    setUser((prev) => ({
+  const handleChange = e => {
+    setUser(prev => ({
       ...prev,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     }))
     if (isError[e.target.name]) {
       setIsError(prev => ({
         ...prev,
-        [e.target.name]: false
+        [e.target.name]: false,
       }))
     }
   }
@@ -62,13 +64,13 @@ const Login = ({ isRegister }) => {
       setIsError({
         username: !user.username,
         password: !user.password,
-        text: false
+        text: false,
       })
     } else {
       setIsError({
         username: false,
         password: false,
-        text: false
+        text: false,
       })
       setIsAuthenticating(true)
     }
@@ -81,7 +83,7 @@ const Login = ({ isRegister }) => {
         username: !user.username,
         password: !user.password,
         confirmationPassword: !user.confirmationPassword,
-        text: false
+        text: false,
       })
     } else {
       if (user.password !== user.confirmationPassword) {
@@ -89,14 +91,14 @@ const Login = ({ isRegister }) => {
           username: false,
           password: true,
           confirmationPassword: true,
-          text: false
+          text: false,
         })
         return
       }
       setIsError({
         username: false,
         password: false,
-        text: false
+        text: false,
       })
       setIsAuthenticating(true)
     }
@@ -132,21 +134,28 @@ const Login = ({ isRegister }) => {
               type="password"
               name="confirmationPassword"
               label="Confirmation du mot de passe"
-              helperText={isError.confirmationPassword && "Les mots de passe doivent être identiques"}
+              helperText={
+                isError.confirmationPassword && "Les mots de passe doivent être identiques"
+              }
               value={user.confirmationPassword}
               onChange={handleChange}
               fullWidth
             />
           )}
-          {isError.text && !isRegister &&
-            (
-              <FormHelperText error>Votre identifiant ou mot de passe est incorrect</FormHelperText>
-            )}
-          <LoadingButton type="submit" variant="contained" loading={isAuthenticating}>{signInUpString}</LoadingButton>
+          {isError.text && !isRegister && (
+            <FormHelperText error>Votre identifiant ou mot de passe est incorrect</FormHelperText>
+          )}
+          <LoadingButton type="submit" variant="contained" loading={isAuthenticating}>
+            {signInUpString}
+          </LoadingButton>
           {isRegister ? (
-            <p>You already have an account? <Link to="/login">Sign In</Link></p>
+            <p>
+              You already have an account? <Link to="/login">Sign In</Link>
+            </p>
           ) : (
-            <p>You don’t have an account? <Link to="/register">Sign Up</Link></p>
+            <p>
+              You don’t have an account? <Link to="/register">Sign Up</Link>
+            </p>
           )}
         </form>
       </Container>
@@ -157,9 +166,9 @@ const Login = ({ isRegister }) => {
 export default Login
 
 Login.propTypes = {
-  isRegister: propTypes.bool
+  isRegister: propTypes.bool,
 }
 
 Login.defaultProps = {
-  isRegister: false
+  isRegister: false,
 }

@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import Slider from "react-slick";
-import PropTypes from 'prop-types';
+import React, { Component } from "react"
+import Slider from "react-slick"
+import PropTypes from "prop-types"
 
 import "./index.css"
 
@@ -12,23 +12,21 @@ const CenterSlider = ({ children }) => {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
-    pauseOnHover: true
-  };
+    pauseOnHover: true,
+  }
   return (
     <div className="slider-container">
-      <Slider {...settings}>
-        {children}
-      </Slider>
+      <Slider {...settings}>{children}</Slider>
     </div>
-  );
+  )
 }
 
-export default CenterSlider;
+export default CenterSlider
 
 CenterSlider.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 }
 
 CenterSlider.defaultProps = {
-  children: null
+  children: null,
 }

@@ -2,9 +2,9 @@ name: Build, Test and Deploy React App
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main, develop]
   pull_request:
-    branches: [ main, develop ]
+    branches: [main, develop]
   workflow_dispatch:
 
 jobs:
@@ -15,7 +15,7 @@ jobs:
         node-version: [20.x]
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install Node ${{ matrix.node-version }}
         uses: actions/setup-node@v3
@@ -28,11 +28,11 @@ jobs:
       - name: Build Project
         run: npm run build
 
-#      - name: Upload artifact to enable deployment
-#        uses: actions/upload-artifact@v3
-#        with:
-#          name: production-files
-#          path: ./dist
+  #      - name: Upload artifact to enable deployment
+  #        uses: actions/upload-artifact@v3
+  #        with:
+  #          name: production-files
+  #          path: ./dist
 
   test:
     runs-on: ubuntu-latest
@@ -43,7 +43,7 @@ jobs:
         node-version: [20.x]
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install Node ${{ matrix.node-version }}
         uses: actions/setup-node@v3
