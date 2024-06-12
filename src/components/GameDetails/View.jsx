@@ -1,7 +1,7 @@
-import PropTypes from "prop-types";
-import CenterSlider from "../CenterSlider";
+import PropTypes from "prop-types"
+import CenterSlider from "../CenterSlider"
 
-import "./index.css";
+import "./index.css"
 
 const View = ({ game }) => {
   return (
@@ -14,11 +14,7 @@ const View = ({ game }) => {
             {game.screenshots && game.screenshots.length > 0 && (
               <CenterSlider>
                 {game.screenshots?.map((screenshot, index) => (
-                  <img
-                    key={index}
-                    src={screenshot}
-                    alt={`Screenshot ${index + 1}`}
-                  />
+                  <img key={index} src={screenshot} alt={`Screenshot ${index + 1}`} />
                 ))}
               </CenterSlider>
             )}
@@ -26,14 +22,14 @@ const View = ({ game }) => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default View;
+export default View
 
 View.propTypes = {
   game: PropTypes.object,
-};
+}
 
 View.defaultProps = {
   game: {
@@ -41,4 +37,4 @@ View.defaultProps = {
     description: "",
     screenshots: [],
   },
-};
+}

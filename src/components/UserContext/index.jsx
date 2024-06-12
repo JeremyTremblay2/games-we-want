@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import useUserData from "../../hooks/useUserData"
 import { useRenewToken } from "../../hooks/useAuthenticate"
@@ -26,8 +26,9 @@ export function UserContextProvider({ children }) {
         favoriteGames,
         setFavoriteGames,
         isLoading,
-        setRefreshUser
-      }}>
+        setRefreshUser,
+      }}
+    >
       {children}
     </UserContext.Provider>
   )
@@ -58,11 +59,10 @@ export function useFavoriteGames() {
   return { favoriteGames, setFavoriteGames }
 }
 
-
 UserContextProvider.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 }
 
 UserContextProvider.defaultProps = {
-  children: null
+  children: null,
 }

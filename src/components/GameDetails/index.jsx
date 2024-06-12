@@ -12,13 +12,7 @@ const GameDetails = () => {
 
   setIsLoading(isLoading)
 
-  return (
-    <>
-      {!isLoading && (
-        <View game={game} />
-      )}
-    </>
-  )
+  return <>{!isLoading && <View game={game} />}</>
 }
 
 export default GameDetails

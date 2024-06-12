@@ -52,16 +52,21 @@ const Layout = () => {
   const handleValidateSearch = e => {
     e.preventDefault()
     setIsSearching(true)
-    navigate("/search")
+    const searchTrimmed = searchTerm.trim()
+    if (searchTrimmed !== "") navigate("/search?q=" + searchTrimmed)
   }
 
   return (
     <>
       <Box>
         <AppBar position="static" id="top-anchor">
-          <Toolbar sx={{ alignItems: "center" }}>
+          <Toolbar sx={{ justifyContent: "space-between" }}>
             <Typography variant="h6" component="div">
-              <Link to="/" style={{ textDecoration: "none", color: "unset" }}>
+              <Link
+                to="/"
+                style={{ textDecoration: "none", color: "unset" }}
+                onClick={() => setSearchTerm("")}
+              >
                 Games we Want
               </Link>
             </Typography>
