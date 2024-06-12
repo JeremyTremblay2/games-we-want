@@ -1,41 +1,25 @@
-import useGameGeneralData from "../../hooks/useGameGeneralData.js";
-import View from "./View.jsx";
-import GameCardsLoading from "./GameCardsLoading.jsx";
-import { SearchContext } from "../SearchContext";
-import "./index.css";
-import { useContext, useEffect } from "react";
-import useSearchGames from "../../hooks/useSearchGames.js";
+import PropTypes from "prop-types"
+import GameCard from "../GameCard"
+import "./index.css"
 
-const GameCards = () => {
-  const { topGames, isLoading } = useGameGeneralData();
-  const { searchTerm, isSearching, setIsSearching } = useContext(SearchContext);
-  useEffect(() =>
-    console.log(
-      data,
-      isLoading,
-      isLoadingSearch,
-      searchTerm,
-      isSearching,
-      setIsSearching
-    )
-  );
-  const { data, isLoading: isLoadingSearch } = useSearchGames({
-    searchTerm,
-    isSearching,
-    setIsSearching,
-  });
-
+const View = ({ gamesList, isLoading }) => {
   return (
-    <>
-      {isLoading || isLoadingSearch ? (
-        <GameCardsLoading itemNumber={10} />
-      ) : searchTerm && searchTerm.trim() !== "" && data ? (
-        <View gamesList={data} isLoading={isLoadingSearch} />
-      ) : (
-        <View gamesList={topGames} isLoading={isLoading} />
-      )}
-    </>
-  );
-};
+    <div className="cards-list">
+      {gamesList?.map(game => (
+        <GameCard key={game.id} game={game} isLoading={isLoading} />
+      ))}
+    </div>
+  )
+}
 
-export default GameCards;
+export default View
+
+View.propTypes = {
+  gamesList: PropTypes.arrayOf(PropTypes.object),
+  isLoading: PropTypes.bool,
+}
+
+View.defaultProps = {
+  gamesList: [],
+  isLoading: false,
+}

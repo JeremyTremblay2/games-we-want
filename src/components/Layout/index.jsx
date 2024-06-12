@@ -52,6 +52,7 @@ const Layout = () => {
   const handleValidateSearch = e => {
     e.preventDefault()
     setIsSearching(true)
+    navigate("/search")
   }
 
   return (
