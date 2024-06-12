@@ -1,36 +1,20 @@
-import useGameGeneralData from "../../hooks/useGameGeneralData.js";
-
-import Box from "@mui/material/Box";
-import Fade from "@mui/material/Fade";
-import CircularProgress from "@mui/material/CircularProgress";
-
-import View from "./View.jsx";
+import useGameGeneralData from "../../hooks/useGameGeneralData.js"
+import View from "./View.jsx"
+import GameCardsLoading from "./GameCardsLoading.jsx"
+import './index.css'
 
 const GameCards = () => {
-  const { topGames, isLoading } = useGameGeneralData();
+  const { topGames, isLoading } = useGameGeneralData()
 
   return (
     <>
       {isLoading ? (
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            marginTop: "160px",
-          }}
-        >
-          <CircularProgress size={100} />
-          <p style={{ fontStyle: "italic", color: "lightgray" }}>
-            We are putting the games into slots, please wait...
-          </p>
-        </Box>
+        <GameCardsLoading itemNumber={10} />
       ) : (
-        <View topGames={topGames} />
+        <View gamesList={topGames} isLoading={isLoading} />
       )}
     </>
-  );
-};
+  )
+}
 
-export default GameCards;
+export default GameCards

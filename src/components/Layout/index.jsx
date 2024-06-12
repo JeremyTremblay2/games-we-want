@@ -1,16 +1,21 @@
 import { useContext, useEffect, useState } from 'react'
-import AppBar from '@mui/material/AppBar'
-import Box from '@mui/material/Box'
-import Toolbar from '@mui/material/Toolbar'
-import Typography from '@mui/material/Typography'
-import IconButton from '@mui/material/IconButton'
-import AccountCircle from '@mui/icons-material/AccountCircle'
-import MenuItem from '@mui/material/MenuItem'
-import Menu from '@mui/material/Menu'
 import { Link, Outlet, useNavigate } from 'react-router-dom'
-import { Button, Container } from "@mui/material"
-import { useDisconnect } from "../../hooks/useAuthenticate"
+import Menu from '@mui/material/Menu'
+import {
+  AppBar,
+  Toolbar,
+  Button,
+  Container,
+  Typography,
+  MenuItem,
+  IconButton
+} from "@mui/material"
+import AccountCircle from '@mui/icons-material/AccountCircle'
+import { handleDisconnect } from "../../hooks/useAuthenticate"
 import { UserContext, useUserInfo } from "../UserContext/index.jsx"
+import { useIsLoading } from "../LoadingContext/index.jsx"
+import ScrollTop from "./ScrollTop"
+import LinearProgress from "@mui/material/LinearProgress"
 
 const Layout = () => {
   const userInfo = useUserInfo()
@@ -19,6 +24,7 @@ const Layout = () => {
   const navigate = useNavigate()
 
   const userContext = useContext(UserContext)
+  const { isLoading } = useIsLoading()
 
   useEffect(() => {
     if (userInfo === null) {
@@ -31,19 +37,20 @@ const Layout = () => {
     setAnchorEl(event.currentTarget)
   }
 
-  const handleClose = () => {
+  const handleClickProfile = () => {
+    navigate("/profile")
     setAnchorEl(null)
   }
 
-  const handleDisconnect = () => {
+  const handleClickDisconnect = () => {
     setAnchorEl(null)
-    useDisconnect(navigate)
+    handleDisconnect(navigate)
     userContext.setRefreshUser(true)
   }
 
   return (
-    <Box sx={{ display: "grid", gridTemplateRows: "auto 1fr", height: "100vh" }}>
-      <AppBar position="static">
+    <>
+      <AppBar position="static" id="top-anchor">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             <Link to="/" style={{ textDecoration: "none", color: "unset" }}>
@@ -75,20 +82,24 @@ const Layout = () => {
                   horizontal: 'right'
                 }}
                 open={Boolean(anchorEl)}
-                onClose={handleClose}
+                onClose={() => setAnchorEl(null)}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleDisconnect}>Disconnect</MenuItem>
+                <MenuItem onClick={handleClickProfile}>Profile</MenuItem>
+                <MenuItem onClick={handleClickDisconnect}>Disconnect</MenuItem>
               </Menu>
             </div>) : (
             <Button color="inherit" onClick={() => navigate("/login")}>Login</Button>
           )}
         </Toolbar>
       </AppBar>
-      <Container maxWidth="lg" sx={{ paddingTop: "20px" }}>
+      {isLoading && (
+        <LinearProgress style={{ width: "100%" }} />
+      )}
+      <Container maxWidth="xl" sx={{ paddingTop: "20px" }}>
         <Outlet />
       </Container>
-    </Box>
+      <ScrollTop />
+    </>
   )
 }
 

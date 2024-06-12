@@ -1,10 +1,24 @@
 import PropTypes from "prop-types"
 import { Navigate } from "react-router-dom"
-import { useUserInfo } from "../UserContext/index.jsx"
+import { useUserInfo, useUserIsLoading } from "../UserContext/index.jsx"
+import { CircularProgress } from "@mui/material"
+import { useIsLoading } from "../LoadingContext/index.jsx"
+import { useEffect } from "react"
 
 const PrivateRoute = ({ children }) => {
   const userInfo = useUserInfo()
-  if (!userInfo || !localStorage.getItem('jwt')) {
+  const isLoading = useUserIsLoading()
+  const { setIsLoading } = useIsLoading()
+
+  useEffect(() => {
+    setIsLoading(isLoading)
+  }, [isLoading])
+
+  if (isLoading) {
+    return null
+  }
+
+  if (!userInfo) {
     return <Navigate to="/login" replace />
   }
 

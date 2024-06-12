@@ -1,27 +1,25 @@
 import PropTypes from 'prop-types'
-import GameCard from '../GameCard';
-import './index.css';
+import GameCard from '../GameCard'
+import './index.css'
 
-const View = ({ topGames }) => {
-    return (
-        <div className="container">
-            <div className="row">
-                {topGames.map((game) => (
-                    <div className="col" key={game.id}>
-                        <GameCard game={game} />
-                    </div>
-                ))}
-            </div>
-        </div>
-    );
+const View = ({ gamesList, isLoading }) => {
+  return (
+    <div className="cards-list">
+      {gamesList.map((game) => (
+        <GameCard key={game.id} game={game} isLoading={isLoading} />
+      ))}
+    </div>
+  )
 }
 
 export default View
 
-View.propTypes = { 
-    topGames: PropTypes.arrayOf(PropTypes.object)
+View.propTypes = {
+  gamesList: PropTypes.arrayOf(PropTypes.object),
+  isLoading: PropTypes.bool
 }
 
 View.defaultProps = {
-    topGames: []
+  gamesList: [],
+  isLoading: false
 }
