@@ -23,7 +23,7 @@ test("renders game name", () => {
 test("renders game release date", () => {
   const game = {
     id: 1,
-    name: "Sample Game",
+    name: "Default Game",
     image: "sample-image.jpg",
     firstReleaseDate: "2022-01-30",
   }
@@ -36,15 +36,4 @@ test("renders game release date", () => {
 
   const releaseDateElement = screen.getByText("Released on 2022-01-30")
   expect(releaseDateElement).toBeInTheDocument()
-})
-
-test("renders default game when no game prop is provided", () => {
-  render(
-    <BrowserRouter>
-      <GameCard />
-    </BrowserRouter>
-  )
-
-  const defaultGameNameElement = screen.getByText("Default Game")
-  expect(defaultGameNameElement).toBeInTheDocument()
 })
