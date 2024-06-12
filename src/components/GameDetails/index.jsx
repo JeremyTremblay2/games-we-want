@@ -1,23 +1,16 @@
-import { useParams } from "react-router-dom";
-import useGameDetailData from "../../hooks/useGameDetailData.js";
-import LinearProgress from "@mui/material/LinearProgress";
-
-import View from "./View.jsx";
+import { useParams } from "react-router-dom"
+import useGameDetailData from "../../hooks/useGameDetailData"
+import View from "./View.jsx"
+import { useIsLoading } from "../LoadingContext"
 
 const GameDetails = () => {
-  let { gameId } = useParams();
+  let { gameId } = useParams()
+  const { game, isLoading } = useGameDetailData(gameId)
+  const { setIsLoading } = useIsLoading()
 
-  const { game, isLoading } = useGameDetailData(gameId);
+  setIsLoading(isLoading)
 
-  return (
-    <>
-      {isLoading ? (
-          <LinearProgress style={{ marginTop: "-20px", width: "100%" }} />
-      ) : (
-        <View game={game} />
-      )}
-    </>
-  );
-};
+  return <>{!isLoading && <View game={game} />}</>
+}
 
-export default GameDetails;
+export default GameDetails

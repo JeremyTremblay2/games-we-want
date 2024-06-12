@@ -1,24 +1,24 @@
-import React from 'react'
+import React from "react"
 import PropTypes from "prop-types"
 import { styled } from "@mui/material"
-import { SnackbarProvider } from 'notistack'
-import { MaterialDesignContent } from 'notistack'
+import { SnackbarProvider } from "notistack"
+import { MaterialDesignContent } from "notistack"
 
-const NotificationsProvider = ({prefersDarkMode}) => {
+const NotificationsProvider = ({ prefersDarkMode }) => {
   // const { notifications } = useSelector((state) => state.notifications);
   const notifications = []
-  const StyledMaterialDesignContent = styled(MaterialDesignContent)(({theme}) => ({
-    '&.notistack-MuiContent': {
-      backgroundColor: prefersDarkMode ? '#FAFAFA' : '#323232',
-      color: prefersDarkMode ? '#323232' : '#FAFAFA',
-      borderRadius: 15
+  const StyledMaterialDesignContent = styled(MaterialDesignContent)(({ theme }) => ({
+    "&.notistack-MuiContent": {
+      backgroundColor: prefersDarkMode ? "#FAFAFA" : "#323232",
+      color: prefersDarkMode ? "#323232" : "#FAFAFA",
+      borderRadius: 15,
     },
-    '&.notistack-MuiContent-success': {
-      backgroundColor: theme.palette.success.main
+    "&.notistack-MuiContent-success": {
+      backgroundColor: theme.palette.success.main,
     },
-    '&.notistack-MuiContent-error': {
-      backgroundColor: theme.palette.error.main
-    }
+    "&.notistack-MuiContent-error": {
+      backgroundColor: theme.palette.error.main,
+    },
   }))
 
   return (
@@ -26,7 +26,7 @@ const NotificationsProvider = ({prefersDarkMode}) => {
       Components={{
         default: StyledMaterialDesignContent,
         success: StyledMaterialDesignContent,
-        error: StyledMaterialDesignContent
+        error: StyledMaterialDesignContent,
       }}
     />
   )
@@ -35,9 +35,9 @@ const NotificationsProvider = ({prefersDarkMode}) => {
 export default NotificationsProvider
 
 NotificationsProvider.propTypes = {
-  prefersDarkMode: PropTypes.bool
+  prefersDarkMode: PropTypes.bool,
 }
 
 NotificationsProvider.defaultProps = {
-  prefersDarkMode: false
+  prefersDarkMode: false,
 }
