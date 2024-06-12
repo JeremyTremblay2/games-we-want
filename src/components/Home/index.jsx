@@ -1,5 +1,5 @@
 import GameCards from "../GameCards"
-import useGameGeneralData from "../../hooks/useGameGeneralData.js"
+import useGameGeneralData from "../../hooks/useGameGeneralData"
 import GameCardsLoading from "../GameCards"
 import "./index.css"
 

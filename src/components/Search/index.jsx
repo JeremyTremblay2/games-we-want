@@ -2,7 +2,7 @@ import GameCards from "../GameCards"
 import GameCardsLoading from "../GameCards"
 import { SearchContext } from "../SearchContext"
 import { useContext, useEffect } from "react"
-import useSearchGames from "../../hooks/useSearchGames.js"
+import useSearchGames from "../../hooks/useSearchGames"
 import { useLocation } from "react-router-dom"
 
 const Search = () => {

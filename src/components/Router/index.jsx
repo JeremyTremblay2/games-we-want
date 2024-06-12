@@ -9,10 +9,8 @@ import Login from "../Login/index.jsx"
 import PrivateRoute from "./PrivateRoute.jsx"
 import { UserContextProvider } from "../UserContext/index.jsx"
 import Profile from "../Profile/index.jsx"
-import { LoadingContextProvider } from "../LoadingContext/index.jsx"
-import { useState } from "react"
-import { SearchContextProvider } from "../SearchContext/index.jsx"
-import useSearchGames from "../../hooks/useSearchGames.js"
+import { LoadingContextProvider } from "../LoadingContext/index"
+import { SearchContextProvider } from "../SearchContext/index"
 import Search from "../Search/index.jsx"
 
 const router = createBrowserRouter([

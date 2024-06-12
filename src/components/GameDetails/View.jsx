@@ -5,23 +5,27 @@ import "./index.css"
 
 const View = ({ game }) => {
   return (
-    <div>
+    <>
       {game && (
-        <div>
+        <>
           <h1>{game.name}</h1>
           <p>{game.description}</p>
-          <div>
-            {game.screenshots && game.screenshots.length > 0 && (
+          <>
+            {game.screenshots && game.screenshots.length > 1 ? (
               <CenterSlider>
                 {game.screenshots?.map((screenshot, index) => (
                   <img key={index} src={screenshot} alt={`Screenshot ${index + 1}`} />
                 ))}
               </CenterSlider>
+            ) : (
+              game.screenshots.length === 1 && (
+                <img src={game.screenshots?.[0]} alt={`Screenshot 1`} style={{ width: "100%" }} />
+              )
             )}
-          </div>
-        </div>
+          </>
+        </>
       )}
-    </div>
+    </>
   )
 }
 
