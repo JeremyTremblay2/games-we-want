@@ -16,10 +16,10 @@ export default View
 
 View.propTypes = {
   gamesList: PropTypes.arrayOf(PropTypes.object),
-  isLoading: PropTypes.bool
+  isLoading: PropTypes.bool,
 }
 
 View.defaultProps = {
   gamesList: [],
-  isLoading: false
+  isLoading: false,
 }

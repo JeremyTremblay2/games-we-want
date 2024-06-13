@@ -133,9 +133,9 @@ const Login = ({ isRegister }) => {
               error={isError.confirmationPassword}
               type="password"
               name="confirmationPassword"
-              label="Confirmation du mot de passe"
+              label="Confirmation Password"
               helperText={
-                isError.confirmationPassword && "Les mots de passe doivent être identiques"
+                isError.confirmationPassword && "Password and confirmation password must match"
               }
               value={user.confirmationPassword}
               onChange={handleChange}
@@ -143,7 +143,7 @@ const Login = ({ isRegister }) => {
             />
           )}
           {isError.text && !isRegister && (
-            <FormHelperText error>Votre identifiant ou mot de passe est incorrect</FormHelperText>
+            <FormHelperText error>Invalid username or password</FormHelperText>
           )}
           <LoadingButton type="submit" variant="contained" loading={isAuthenticating}>
             {signInUpString}
