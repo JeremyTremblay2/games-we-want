@@ -4,7 +4,7 @@ import PropTypes from "prop-types"
 export const LoadingContext = createContext()
 let tokenTimeout
 
-export function LoadingContextProvider({ children }) {
+export function LoadingContextProvider({ children = null }) {
   const [isLoading, setIsLoading] = useState(false)
 
   return (
@@ -21,8 +21,4 @@ export function useIsLoading() {
 
 LoadingContextProvider.propTypes = {
   children: PropTypes.node.isRequired,
-}
-
-LoadingContextProvider.defaultProps = {
-  children: null,
 }

@@ -9,9 +9,8 @@ import VideogameAssetIcon from "@mui/icons-material/VideogameAsset"
 import GamepadIcon from "@mui/icons-material/Gamepad"
 import PropTypes from "prop-types"
 
-const PlatformList = ({ platforms, companies }) => {
+const PlatformList = ({ platforms = [] }) => {
   function getPlatformIcon(platform, name) {
-    console.log(platform, name)
     switch (platform) {
       case "Console":
         return <SportsEsportsIcon />
@@ -82,9 +81,4 @@ export default PlatformList
 PlatformList.propTypes = {
   platforms: PropTypes.array,
   companies: PropTypes.array,
-}
-
-PlatformList.defaultProps = {
-  platforms: [],
-  companies: [],
 }

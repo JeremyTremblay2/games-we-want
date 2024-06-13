@@ -41,6 +41,7 @@ const Layout = () => {
 
   const handleClickDisconnect = () => {
     setAnchorEl(null)
+    setSearchTerm("")
     handleDisconnect(navigate)
     userContext.setRefreshUser(true)
   }
@@ -57,7 +58,7 @@ const Layout = () => {
   }
 
   return (
-    <>
+    <div style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
       <Box>
         <AppBar position="static" id="top-anchor">
           <Toolbar sx={{ display: "grid", gridTemplateColumns: "1fr 2fr 1fr" }}>
@@ -152,7 +153,7 @@ const Layout = () => {
         </AppBar>
       </Box>
       {isLoading && <LinearProgress style={{ width: "100%" }} />}
-      <Container maxWidth="xl" sx={{ padding: "20px 0" }}>
+      <Container maxWidth="xl" sx={{ padding: "20px 0", flexGrow: 1 }}>
         <Outlet />
       </Container>
       <AppBar position="static">
@@ -161,7 +162,7 @@ const Layout = () => {
         </Toolbar>
       </AppBar>
       <ScrollTop />
-    </>
+    </div>
   )
 }
 

@@ -34,11 +34,14 @@ const Home = () => {
 
       <TablePagination
         component="div"
+        style={{ display: "flex", justifyContent: "center" }}
         page={page - 1}
         count={-1}
         onPageChange={handleChangePage}
         rowsPerPage={rowsPerPage}
         onRowsPerPageChange={handleChangeRowsPerPage}
+        labelDisplayedRows={({ from, to }) => `${from}-${to}`}
+        labelRowsPerPage=""
       />
     </>
   )

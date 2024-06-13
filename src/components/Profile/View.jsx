@@ -8,13 +8,13 @@ import useDeleteAccount from "../../hooks/useDeleteAccount"
 import PropTypes from "prop-types"
 
 const Profile = ({
-  user,
-  favoriteGames,
-  page,
-  rowsPerPage,
-  handleChangePage,
-  handleChangeRowsPerPage,
-  setIsDeletingAccount,
+  user = {},
+  favoriteGames = [],
+  page = 1,
+  rowsPerPage = 10,
+  handleChangePage = () => {},
+  handleChangeRowsPerPage = () => {},
+  setIsDeletingAccount = () => {},
 }) => {
   return (
     <div className="profile">
@@ -31,11 +31,14 @@ const Profile = ({
       )}
       <TablePagination
         component="div"
+        style={{ display: "flex", justifyContent: "center" }}
         page={page - 1}
         count={favoriteGames.length}
         onPageChange={handleChangePage}
         rowsPerPage={rowsPerPage}
         onRowsPerPageChange={handleChangeRowsPerPage}
+        labelDisplayedRows={({ from, to, count }) => `${from}-${to}`}
+        labelRowsPerPage=""
       />
       <h2>Manage Account</h2>
       <Button
@@ -61,14 +64,4 @@ Profile.propTypes = {
   handleChangePage: PropTypes.func,
   handleChangeRowsPerPage: PropTypes.func,
   setIsDeletingAccount: PropTypes.func,
-}
-
-Profile.defaultProps = {
-  user: {},
-  favoriteGames: [],
-  page: 1,
-  rowsPerPage: 10,
-  handleChangePage: () => {},
-  handleChangeRowsPerPage: () => {},
-  setIsDeletingAccount: () => {},
 }

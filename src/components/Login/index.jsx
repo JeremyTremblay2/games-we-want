@@ -8,7 +8,7 @@ import "./index.css"
 import { UserContext, useRefreshUserData } from "../UserContext/index.jsx"
 import { enqueueSnackbar } from "notistack"
 
-const Login = ({ isRegister }) => {
+const Login = ({ isRegister = false }) => {
   const navigate = useNavigate()
 
   const [user, setUser] = useState({
@@ -150,11 +150,14 @@ const Login = ({ isRegister }) => {
           </LoadingButton>
           {isRegister ? (
             <p>
-              You already have an account? <Link to="/login">Sign In</Link>
+              You already have an account?
+              <br />
+              <Link to="/login">Sign In</Link>
             </p>
           ) : (
             <p>
-              You don’t have an account? <Link to="/register">Sign Up</Link>
+              You don’t have an account? <br />
+              <Link to="/register">Sign Up</Link>
             </p>
           )}
         </form>
@@ -167,8 +170,4 @@ export default Login
 
 Login.propTypes = {
   isRegister: propTypes.bool,
-}
-
-Login.defaultProps = {
-  isRegister: false,
 }

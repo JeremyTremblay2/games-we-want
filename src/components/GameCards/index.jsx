@@ -2,7 +2,7 @@ import PropTypes from "prop-types"
 import GameCard from "../GameCard"
 import "./index.css"
 
-const View = ({ gamesList, isLoading }) => {
+const View = ({ gamesList = [], isLoading = false }) => {
   return (
     <div className="cards-list">
       {gamesList.map(game => (
@@ -17,9 +17,4 @@ export default View
 View.propTypes = {
   gamesList: PropTypes.arrayOf(PropTypes.object),
   isLoading: PropTypes.bool,
-}
-
-View.defaultProps = {
-  gamesList: [],
-  isLoading: false,
 }

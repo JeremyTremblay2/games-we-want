@@ -25,8 +25,6 @@ const Profile = () => {
     setRowsPerPage(parseInt(event.target.value, 10))
     setPage(1)
   }
-  console.log(user)
-  console.log(favoriteGames)
 
   return (
     <View
