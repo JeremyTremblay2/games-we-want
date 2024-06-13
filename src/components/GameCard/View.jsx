@@ -13,6 +13,7 @@ import "./index.css"
 const View = ({ game, isLoading, image, isImageLoading, isFavorite, handleFavorite, userInfo }) => (
   <Link to={`/game/${game.id}`} style={{ textDecoration: "none", width: "300px" }}>
     <Card
+      data-testid="GameCard"
       sx={{
         position: "relative",
         width: "300px",

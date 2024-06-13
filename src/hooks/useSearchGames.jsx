@@ -3,12 +3,12 @@ import PropTypes from "prop-types"
 import { API_BASE_URL, API_SEARCH_URL } from "../utils/constants"
 
 const useSearchGames = ({
-    searchTerm = "",
-    isSearching = false,
-    setIsSearching,
-    rowsPerPage = 10,
-    page = 1
-  }) => {
+  searchTerm = "",
+  isSearching = false,
+  setIsSearching,
+  rowsPerPage = 10,
+  page = 1,
+}) => {
   const [data, setData] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
 
@@ -22,8 +22,8 @@ const useSearchGames = ({
           {
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${jwt}`
-            }
+              Authorization: `Bearer ${jwt}`,
+            },
           }
         )
 
@@ -38,7 +38,7 @@ const useSearchGames = ({
           gamesList.push({
             id: data[i].id,
             firstReleaseDate: data[i].firstReleaseDate,
-            name: data[i].name
+            name: data[i].name,
           })
         }
         setData(gamesList)
@@ -64,5 +64,5 @@ useSearchGames.propTypes = {
   isSearching: PropTypes.bool,
   setIsSearching: PropTypes.func,
   rowsPerPage: PropTypes.number,
-  page: PropTypes.number
+  page: PropTypes.number,
 }
