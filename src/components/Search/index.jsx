@@ -1,5 +1,5 @@
 import GameCards from "../GameCards"
-import GameCardsLoading from "../GameCards"
+import Index from "../GameCardsLoading"
 import { SearchContext } from "../SearchContext"
 import { useContext, useEffect, useState } from "react"
 import useSearchGames from "../../hooks/useSearchGames"
@@ -24,12 +24,12 @@ const Search = () => {
       setIsSearching(true)
     }
   }, [searchTerm])
-  const { data, isLoading: isLoadingSearch } = useSearchGames({
+  const { data, isLoading } = useSearchGames({
     searchTerm,
     isSearching,
     setIsSearching,
     rowsPerPage,
-    page,
+    page
   })
 
   const handleChangePage = (event, newPage) => {
@@ -43,20 +43,11 @@ const Search = () => {
 
   return (
     <>
-      {data && <h1>Games</h1>}
-      {isLoadingSearch && (
-        <>
-          <p>Searching...</p>
-          <GameCardsLoading itemNumber={10} />
-        </>
-      )}
-      {data && data.length > 0 ? (
-        <>
-          <p>Here are the games found: </p>
-          <GameCards gamesList={data} isLoading={isLoadingSearch} />
-        </>
+      <h1>Games</h1>
+      {isLoading ? (
+        <Index itemNumber={rowsPerPage} isLoading={true} />
       ) : (
-        <p>No games found for your research.</p>
+        <GameCards gamesList={data} isLoading={isLoading} />
       )}
       <TablePagination
         component="div"

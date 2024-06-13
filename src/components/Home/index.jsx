@@ -1,6 +1,6 @@
 import GameCards from "../GameCards"
 import useGameGeneralData from "../../hooks/useGameGeneralData"
-import GameCardsLoading from "../GameCards"
+import Index from "../GameCardsLoading"
 import "./index.css"
 
 import "./index.css"
@@ -26,9 +26,8 @@ const Home = () => {
     <>
       <h1>Top Games</h1>
       <p>Here you can find the best games of all time!</p>
-      <GameCards />
       {isLoading ? (
-        <GameCardsLoading itemNumber={rowsPerPage} />
+        <Index itemNumber={rowsPerPage} isLoading={true} />
       ) : (
         <GameCards gamesList={topGames} isLoading={isLoading} />
       )}
