@@ -2,6 +2,17 @@ import PropTypes from "prop-types"
 import CenterSlider from "../CenterSlider"
 
 import "./index.css"
+import {
+  Accordion,
+  AccordionActions,
+  AccordionDetails,
+  AccordionSummary,
+  Button,
+  Typography,
+} from "@mui/material"
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
+import OpenInNewIcon from "@mui/icons-material/OpenInNew"
+import { Link } from "react-router-dom"
 
 const View = ({ game }) => {
   return (
@@ -22,6 +33,40 @@ const View = ({ game }) => {
                 <img src={game.screenshots?.[0]} alt={`Screenshot 1`} style={{ width: "100%" }} />
               )
             )}
+            {game.companies && game.companies.length > 0 && (
+              <h2 style={{ fontSize: "24px" }}>Companies who developed this game</h2>
+            )}
+            {game.companies?.map((company, index) => (
+              <Accordion key={index}>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls={`panel${index}-content`}
+                  id={`panel${index}-header`}
+                  style={{ fontSize: "20px" }}
+                >
+                  {company.name}
+                </AccordionSummary>
+                {company.description ? (
+                  <AccordionDetails>
+                    <Typography>{company.description}</Typography>
+                  </AccordionDetails>
+                ) : (
+                  <AccordionDetails>
+                    <Typography>We have no further information about this company.</Typography>
+                  </AccordionDetails>
+                )}
+                <AccordionActions>
+                  <Button
+                    href={company.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    endIcon={<OpenInNewIcon />}
+                  >
+                    See more
+                  </Button>
+                </AccordionActions>
+              </Accordion>
+            ))}
           </>
         </>
       )}
@@ -40,5 +85,6 @@ View.defaultProps = {
     name: "",
     description: "",
     screenshots: [],
+    companies: [],
   },
 }

@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react"
-import { API_BASE_URL, API_GAME_DETAIL, API_SCREENSHOTS_URL } from "../utils/constants"
+import {
+  API_BASE_URL,
+  API_GAME_DETAIL,
+  API_SCREENSHOTS_URL,
+  API_COMPANIES_URL,
+} from "../utils/constants"
 import { enqueueSnackbar } from "notistack"
 
 const useGameDetailData = gameId => {
@@ -59,7 +64,42 @@ const useGameDetailData = gameId => {
         name: data.name,
         description: data.summary,
         screenshots: screenshots,
+        companies: [],
       }
+
+      try {
+        for (let i = 0; i < data.involvedCompanies.ids.length; i++) {
+          try {
+            const companyResult = await fetch(
+              `${API_BASE_URL}${API_COMPANIES_URL}/${data.involvedCompanies.ids[i]}`,
+              {
+                method: "GET",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: "Bearer " + localStorage.getItem("jwt"),
+                },
+              }
+            )
+            const companyResultsData = await companyResult.json()
+            console.log("companyResultsData:", companyResultsData)
+            game.companies.push({
+              name: companyResultsData.name,
+              description: companyResultsData.description,
+              url: companyResultsData.url,
+            })
+          } catch (error) {
+            console.warn(
+              "Failed to get the company",
+              data.involvedCompanies.ids,
+              " for the game",
+              gameId
+            )
+          }
+        }
+      } catch (error) {
+        console.warn("Failed to get the companies for the game", gameId)
+      }
+
       setGame(game)
     }
 
