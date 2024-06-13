@@ -1,0 +1,64 @@
+.gameDetail-top {
+  position: relative;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  padding-bottom: 15px;
+}
+
+.gameDetail-bottom {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 20px;
+  padding-top: 20px;
+  width: 100%;
+}
+
+.gameDetail-bottom > :only-child {
+  grid-column: 1/-1;
+  gap: 20px;
+}
+
+.carousel {
+  margin: 0 28px;
+}
+
+.favorite-button {
+  position: absolute !important;
+  right: 10px;
+  top: 0;
+}
+
+h2 {
+  margin: 0;
+  padding: 10px;
+}
+
+@media screen and (max-width: 700px) {
+  .gameDetail-top {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    place-items: center;
+    height: 100%;
+  }
+
+  .gameDetail-bottom {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .carousel {
+    margin: 0;
+    border-radius: 0;
+    overflow: hidden;
+  }
+
+  .favorite-button {
+    position: relative !important;
+    margin: 0;
+  }
+}

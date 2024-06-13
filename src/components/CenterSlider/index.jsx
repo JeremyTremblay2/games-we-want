@@ -4,7 +4,7 @@ import PropTypes from "prop-types"
 
 import "./index.css"
 
-const CenterSlider = ({ children }) => {
+const CenterSlider = ({ children = null }) => {
   var settings = {
     dots: true,
     infinite: true,
@@ -25,8 +25,4 @@ export default CenterSlider
 
 CenterSlider.propTypes = {
   children: PropTypes.node.isRequired,
-}
-
-CenterSlider.defaultProps = {
-  children: null,
 }

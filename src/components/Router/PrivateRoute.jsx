@@ -5,7 +5,7 @@ import { CircularProgress } from "@mui/material"
 import { useIsLoading } from "../LoadingContext/index.jsx"
 import { useEffect } from "react"
 
-const PrivateRoute = ({ children }) => {
+const PrivateRoute = ({ children = null }) => {
   const userInfo = useUserInfo()
   const isLoading = useUserIsLoading()
   const { setIsLoading } = useIsLoading()
@@ -27,10 +27,6 @@ const PrivateRoute = ({ children }) => {
 
 PrivateRoute.propTypes = {
   children: PropTypes.node.isRequired,
-}
-
-PrivateRoute.defaultProps = {
-  children: null,
 }
 
 export default PrivateRoute

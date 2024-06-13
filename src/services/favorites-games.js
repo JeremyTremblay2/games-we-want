@@ -14,7 +14,7 @@ export const addFavorite = async gameId => {
       enqueueSnackbar("Game successfully added to favorites!", { variant: "success" })
       return true
     case 409:
-      enqueueSnackbar("Game already in favorites", { variant: "warning" })
+      enqueueSnackbar("Game already in favorites", { variant: "error" })
       return false
     case 401:
       enqueueSnackbar("Unauthorized", { variant: "error" })
@@ -36,7 +36,6 @@ export const removeFavorite = async gameId => {
       Authorization: `Bearer ${localStorage.getItem("jwt")}`,
     },
   })
-  console.log(response)
   switch (response.status) {
     case 204:
       enqueueSnackbar("Game successfully removed from favorites!", { variant: "success" })
@@ -53,5 +52,18 @@ export const removeFavorite = async gameId => {
     default:
       enqueueSnackbar("Unknown error", { variant: "error" })
       throw new Error("Unknown error")
+  }
+}
+
+export const handleFavorite = async (e, game, isFavorite, setFavoriteGames) => {
+  e.preventDefault()
+  console.log(game, isFavorite, setFavoriteGames)
+  if (!isFavorite) {
+    const isAdded = await addFavorite(game.id)
+    if (isAdded) setFavoriteGames(prev => [...prev, game])
+  } else {
+    const isRemoved = await removeFavorite(game.id)
+    if (isRemoved)
+      setFavoriteGames(prev => prev.filter(favoriteGame => favoriteGame.id !== game.id))
   }
 }

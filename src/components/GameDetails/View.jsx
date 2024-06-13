@@ -1,40 +1,39 @@
 import PropTypes from "prop-types"
-import { Grid, Paper } from "@mui/material"
+import { Grid, IconButton, Paper } from "@mui/material"
 import PlatformList from "./PlatformList"
 import CompanyAccordions from "./CompanyAccordions"
 import GameRating from "./GameRating"
 import GameScreenshotCarousel from "./GameScreenshotCarousel"
 import GameDescription from "./GameDescription"
 import GameGeneralInformation from "./GameGeneralInformation"
-
 import "./index.css"
+import FavoriteIcon from "@mui/icons-material/Favorite"
 
-const View = ({ game }) => {
+const View = ({ game = {}, isFavorite = false, setFavoriteGames }) => {
   return (
     <Paper style={{ padding: "20px" }}>
       {game && (
         <>
-          <Grid container spacing={2}>
+          <div className="gameDetail-top">
             <Grid item xs={game.rating ? 9 : 12}>
-              <GameGeneralInformation game={game} />
+              <GameGeneralInformation
+                game={game}
+                isFavorite={isFavorite}
+                setFavoriteGames={setFavoriteGames}
+              />
             </Grid>
-
             <Grid item xs={3}>
               <GameRating rating={game.rating} />
             </Grid>
-          </Grid>
+          </div>
           <GameDescription description={game.description} />
           <>
             <GameScreenshotCarousel screenshots={game.screenshots} />
 
-            <Grid container spacing={2}>
-              <Grid item xs={game.platforms && game.platforms.length > 0 ? 9 : 12}>
-                <CompanyAccordions companies={game.companies} />
-              </Grid>
-              <Grid item xs={game.companies && game.companies.length > 0 ? 3 : 12}>
-                <PlatformList platforms={game.platforms} companies={game.companies} />
-              </Grid>
-            </Grid>
+            <div className="gameDetail-bottom">
+              <CompanyAccordions companies={game.companies} />
+              <PlatformList platforms={game.platforms} companies={game.companies} />
+            </div>
           </>
         </>
       )}
@@ -46,13 +45,6 @@ export default View
 
 View.propTypes = {
   game: PropTypes.object,
-}
-
-View.defaultProps = {
-  game: {
-    name: "",
-    description: "",
-    screenshots: [],
-    companies: [],
-  },
+  isFavorite: PropTypes.bool,
+  setFavoriteGames: PropTypes.func,
 }

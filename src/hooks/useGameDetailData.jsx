@@ -63,6 +63,7 @@ const useGameDetailData = (gameId = 0) => {
       })
 
       const game = {
+        id: parseInt(gameId),
         name: data.name,
         description: data.summary,
         releaseDate: data.firstReleaseDate,

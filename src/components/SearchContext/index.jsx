@@ -4,7 +4,7 @@ import PropTypes from "prop-types"
 
 export const SearchContext = createContext()
 
-export const SearchContextProvider = ({ children }) => {
+export const SearchContextProvider = ({ children = null }) => {
   const [searchTerm, setSearchTerm] = useState("")
   const [isSearching, setIsSearching] = useState(false)
 
@@ -22,8 +22,4 @@ export function useSearchContext() {
 
 SearchContextProvider.propTypes = {
   children: PropTypes.node.isRequired,
-}
-
-SearchContextProvider.defaultProps = {
-  children: null,
 }
