@@ -81,14 +81,14 @@ const Layout = () => {
                     borderRadius: "50px",
                     backgroundColor: "rgba(255, 255, 255, 0.15)",
                     "&:hover": {
-                      backgroundColor: "rgba(255, 255, 255, 0.25)"
+                      backgroundColor: "rgba(255, 255, 255, 0.25)",
                     },
                     padding: "0 10px",
                     gap: 0,
                     width: "-webkit-fill-available",
                     minWidth: "80px",
                     maxWidth: "500px",
-                    height: "32px"
+                    height: "32px",
                   }}
                 >
                   <SearchIcon sx={{ fontSize: 22 }} />
@@ -98,7 +98,7 @@ const Layout = () => {
                     inputProps={{ "aria-label": "search" }}
                     sx={{
                       color: "inherit",
-                      paddingLeft: "6px"
+                      paddingLeft: "6px",
                     }}
                     onChange={handleSearchChange}
                     value={searchTerm}
@@ -120,12 +120,12 @@ const Layout = () => {
                     anchorEl={anchorEl}
                     anchorOrigin={{
                       vertical: "bottom",
-                      horizontal: "right"
+                      horizontal: "right",
                     }}
                     keepMounted
                     transformOrigin={{
                       vertical: "top",
-                      horizontal: "right"
+                      horizontal: "right",
                     }}
                     open={Boolean(anchorEl)}
                     onClose={() => setAnchorEl(null)}
@@ -138,7 +138,11 @@ const Layout = () => {
             ) : (
               <>
                 <div />
-                <Button sx={{ justifySelf: "end" }} color="inherit" onClick={() => navigate("/login")}>
+                <Button
+                  sx={{ justifySelf: "end" }}
+                  color="inherit"
+                  onClick={() => navigate("/login")}
+                >
                   Login
                 </Button>
               </>
@@ -150,6 +154,11 @@ const Layout = () => {
       <Container maxWidth="xl" sx={{ padding: "20px 0" }}>
         <Outlet />
       </Container>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography sx={{ flexGrow: 1 }}>2024 – CROISIER Maxime – TREMBLAY Jérémy</Typography>
+        </Toolbar>
+      </AppBar>
       <ScrollTop />
     </>
   )
