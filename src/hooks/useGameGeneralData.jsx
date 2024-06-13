@@ -5,7 +5,6 @@ import game_image from "../assets/images/game_image_placeholder.png"
 const useGameGeneralData = ({ rowsPerPage, page }) => {
   const [topGames, setTopGames] = useState([])
   const [isLoading, setIsLoading] = useState(true)
-  console.log("useGameGeneralData", rowsPerPage, page)
 
   useEffect(() => {
     async function getData() {
@@ -37,8 +36,6 @@ const useGameGeneralData = ({ rowsPerPage, page }) => {
 
     getData().then(() => setIsLoading(false))
   }, [rowsPerPage, page])
-
-  console.log("topGames", topGames)
 
   return { topGames, isLoading }
 }
