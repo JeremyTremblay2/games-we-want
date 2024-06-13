@@ -13,17 +13,17 @@ const GameCard = ({ game, isLoading }) => {
   })
 
   const { favoriteGames, setFavoriteGames, userInfo } = useContext(UserContext)
-  const isFavorite = favoriteGames.some(favoriteGame => favoriteGame.id === game.id)
+  const isFavorite = favoriteGames?.some(favoriteGame => favoriteGame.id === game.id)
 
   const handleFavorite = async e => {
     e.preventDefault()
     if (!isFavorite) {
       const isAdded = await addFavorite(game.id)
-      if (isAdded) setFavoriteGames([...favoriteGames, game])
+      if (isAdded) setFavoriteGames(prev => [...prev, game])
     } else {
       const isRemoved = await removeFavorite(game.id)
       if (isRemoved)
-        setFavoriteGames(favoriteGames.filter(favoriteGame => favoriteGame.id !== game.id))
+        setFavoriteGames(prev => prev.filter(favoriteGame => favoriteGame.id !== game.id))
     }
   }
 

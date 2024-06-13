@@ -1,10 +1,9 @@
 import GameCard from "../GameCard"
 import PropTypes from "prop-types"
 
-
 const GameCardsLoading = ({ itemNumber }) => {
   return (
-    <div className="cards-list">
+    <div className="cards-list" data-testid="cards-list">
       {[...Array(itemNumber)].map((_, index) => (
         <GameCard key={index} isLoading />
       ))}
@@ -13,12 +12,11 @@ const GameCardsLoading = ({ itemNumber }) => {
 }
 
 GameCardsLoading.defaultProps = {
-  itemNumber: 10
+  itemNumber: 10,
 }
 
 GameCardsLoading.propTypes = {
-  itemNumber: PropTypes.number
+  itemNumber: PropTypes.number,
 }
 
 export default GameCardsLoading
-

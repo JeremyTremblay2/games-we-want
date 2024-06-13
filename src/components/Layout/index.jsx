@@ -102,6 +102,7 @@ const Layout = () => {
                     }}
                     onChange={handleSearchChange}
                     value={searchTerm}
+                    fullWidth={true}
                   />
                 </form>
                 <div style={{ justifySelf: "end" }}>
