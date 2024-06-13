@@ -7,8 +7,9 @@ import {
   API_PLATFORMS_URL,
 } from "../utils/constants"
 import { enqueueSnackbar } from "notistack"
+import PropTypes from "prop-types"
 
-const useGameDetailData = gameId => {
+const useGameDetailData = (gameId = 0) => {
   const [game, setGame] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
 
@@ -134,3 +135,7 @@ const useGameDetailData = gameId => {
 }
 
 export default useGameDetailData
+
+useGameDetailData.propTypes = {
+  gameId: PropTypes.number,
+}

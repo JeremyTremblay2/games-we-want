@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import { enqueueSnackbar } from "notistack"
 import {
   API_BASE_URL,
-  API_USER_DELETE,
   API_USER_LOGIN,
   API_USER_REGISTER,
   API_USER_RENEW_TOKEN,

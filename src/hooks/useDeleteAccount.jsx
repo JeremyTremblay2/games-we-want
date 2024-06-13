@@ -1,11 +1,12 @@
 import { useEffect } from "react"
+import PropTypes from "prop-types"
 import { enqueueSnackbar } from "notistack"
 import { useNavigate } from "react-router-dom"
 import { API_BASE_URL, API_USER_DELETE } from "../utils/constants.js"
 import { useSetUserInfo } from "../components/UserContext"
 import { handleDisconnect } from "./useAuthenticate"
 
-export const useDeleteAccount = isDeletingAccount => {
+export const useDeleteAccount = (isDeletingAccount = false) => {
   useEffect(() => {
     if (isDeletingAccount) handleDeleteAccount()
   }, [isDeletingAccount])
@@ -39,3 +40,7 @@ export const useDeleteAccount = isDeletingAccount => {
 }
 
 export default useDeleteAccount
+
+useDeleteAccount.propTypes = {
+  isDeletingAccount: PropTypes.bool,
+}

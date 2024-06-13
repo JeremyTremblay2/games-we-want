@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react"
-import { API_TOP_10_GAMES_URL, API_SCREENSHOTS_URL, API_BASE_URL } from "../utils/constants"
-import game_image from "../assets/images/game_image_placeholder.png"
+import PropTypes from "prop-types"
+import { API_TOP_10_GAMES_URL, API_BASE_URL } from "../utils/constants"
 
-const useGameGeneralData = () => {
+const useGameGeneralData = ({ rowsPerPage = 10, page = 1 }) => {
   const [topGames, setTopGames] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     async function getData() {
       // API call
-      const result = await fetch(`${API_BASE_URL}${API_TOP_10_GAMES_URL}?pageSize=10&page=1`)
+      const result = await fetch(
+        `${API_BASE_URL}${API_TOP_10_GAMES_URL}?pageSize=${rowsPerPage}&page=${page}`
+      )
 
       if (!result.ok) {
         throw "There was a problem while collecting data, please retry."
@@ -33,9 +35,14 @@ const useGameGeneralData = () => {
     setIsLoading(true)
 
     getData().then(() => setIsLoading(false))
-  }, [])
+  }, [rowsPerPage, page])
 
   return { topGames, isLoading }
 }
 
 export default useGameGeneralData
+
+useGameGeneralData.propTypes = {
+  rowsPerPage: PropTypes.number,
+  page: PropTypes.number,
+}

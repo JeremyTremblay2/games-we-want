@@ -7,11 +7,11 @@ import AccountCircle from "@mui/icons-material/AccountCircle"
 import InputBase from "@mui/material/InputBase"
 import SearchIcon from "@mui/icons-material/Search"
 import { handleDisconnect } from "../../hooks/useAuthenticate"
-import { UserContext, useUserInfo } from "../UserContext/index.jsx"
-import { useIsLoading } from "../LoadingContext/index.jsx"
+import { UserContext, useUserInfo } from "../UserContext"
+import { useIsLoading } from "../LoadingContext/index"
 import ScrollTop from "./ScrollTop"
 import LinearProgress from "@mui/material/LinearProgress"
-import { SearchContext } from "../SearchContext/index.jsx"
+import { SearchContext } from "../SearchContext/index"
 
 const Layout = () => {
   const userInfo = useUserInfo()
@@ -60,7 +60,7 @@ const Layout = () => {
     <>
       <Box>
         <AppBar position="static" id="top-anchor">
-          <Toolbar sx={{ justifyContent: "space-between" }}>
+          <Toolbar sx={{ display: "grid", gridTemplateColumns: "1fr 2fr 1fr" }}>
             <Typography variant="h6" component="div">
               <Link
                 to="/"
@@ -71,7 +71,7 @@ const Layout = () => {
               </Link>
             </Typography>
             {userInfo ? (
-              <div style={{ display: "flex", alignItems: "center", flexGrow: 1 }}>
+              <>
                 <form
                   onSubmit={handleValidateSearch}
                   style={{
@@ -81,12 +81,14 @@ const Layout = () => {
                     borderRadius: "50px",
                     backgroundColor: "rgba(255, 255, 255, 0.15)",
                     "&:hover": {
-                      backgroundColor: "rgba(255, 255, 255, 0.25)",
+                      backgroundColor: "rgba(255, 255, 255, 0.25)"
                     },
                     padding: "0 10px",
                     gap: 0,
-                    flexGrow: 0.3,
-                    margin: "auto",
+                    width: "-webkit-fill-available",
+                    minWidth: "80px",
+                    maxWidth: "500px",
+                    height: "32px"
                   }}
                 >
                   <SearchIcon sx={{ fontSize: 22 }} />
@@ -96,14 +98,13 @@ const Layout = () => {
                     inputProps={{ "aria-label": "search" }}
                     sx={{
                       color: "inherit",
-                      paddingLeft: "6px",
-                      flexGrow: 1,
+                      paddingLeft: "6px"
                     }}
                     onChange={handleSearchChange}
                     value={searchTerm}
                   />
                 </form>
-                <div style={{ alignItems: "end" }}>
+                <div style={{ justifySelf: "end" }}>
                   <IconButton
                     size="large"
                     aria-label="account of current user"
@@ -119,12 +120,12 @@ const Layout = () => {
                     anchorEl={anchorEl}
                     anchorOrigin={{
                       vertical: "bottom",
-                      horizontal: "right",
+                      horizontal: "right"
                     }}
                     keepMounted
                     transformOrigin={{
                       vertical: "top",
-                      horizontal: "right",
+                      horizontal: "right"
                     }}
                     open={Boolean(anchorEl)}
                     onClose={() => setAnchorEl(null)}
@@ -133,17 +134,20 @@ const Layout = () => {
                     <MenuItem onClick={handleClickDisconnect}>Disconnect</MenuItem>
                   </Menu>
                 </div>
-              </div>
+              </>
             ) : (
-              <Button color="inherit" onClick={() => navigate("/login")}>
-                Login
-              </Button>
+              <>
+                <div />
+                <Button sx={{ justifySelf: "end" }} color="inherit" onClick={() => navigate("/login")}>
+                  Login
+                </Button>
+              </>
             )}
           </Toolbar>
         </AppBar>
       </Box>
       {isLoading && <LinearProgress style={{ width: "100%" }} />}
-      <Container maxWidth="xl" sx={{ paddingTop: "20px" }}>
+      <Container maxWidth="xl" sx={{ padding: "20px 0" }}>
         <Outlet />
       </Container>
       <ScrollTop />

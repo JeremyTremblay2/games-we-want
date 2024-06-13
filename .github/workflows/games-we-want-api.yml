@@ -37,7 +37,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     needs: build
-    if: github.actor!= 'dependabot'
+    if: github.actor != 'dependabot[bot]'
     strategy:
       matrix:
         node-version: [20.x]
