@@ -1,29 +1,29 @@
 import PropTypes from "prop-types"
-import * as React from "react"
 
 import View from "./View.jsx"
 import useGameCoverImage from "../../hooks/useGameCoverImage"
-import { useFavoriteGames } from "../UserContext/index.jsx"
+import { UserContext } from "../UserContext/index.jsx"
 import { addFavorite, removeFavorite } from "../../services/favorites-games"
 import "./index.css"
-import { enqueueSnackbar } from "notistack"
+import { useContext } from "react"
 
 const GameCard = ({ game, isLoading }) => {
   const gameCover = useGameCoverImage({
-    gameId: game?.id
+    gameId: game?.id,
   })
 
-  const { favoriteGames, setFavoriteGames } = useFavoriteGames()
-  const isFavorite = favoriteGames.some((favoriteGame) => favoriteGame.id === game.id)
+  const { favoriteGames, setFavoriteGames, userInfo } = useContext(UserContext)
+  const isFavorite = favoriteGames.some(favoriteGame => favoriteGame.id === game.id)
 
-  const handleFavorite = async (e) => {
+  const handleFavorite = async e => {
     e.preventDefault()
     if (!isFavorite) {
       const isAdded = await addFavorite(game.id)
       if (isAdded) setFavoriteGames([...favoriteGames, game])
     } else {
       const isRemoved = await removeFavorite(game.id)
-      if (isRemoved) setFavoriteGames(favoriteGames.filter((favoriteGame) => favoriteGame.id !== game.id))
+      if (isRemoved)
+        setFavoriteGames(favoriteGames.filter(favoriteGame => favoriteGame.id !== game.id))
     }
   }
 
@@ -35,6 +35,7 @@ const GameCard = ({ game, isLoading }) => {
       isLoading={isLoading}
       isFavorite={isFavorite}
       handleFavorite={handleFavorite}
+      userInfo={userInfo}
     />
   )
 }
@@ -43,9 +44,9 @@ export default GameCard
 
 GameCard.propTypes = {
   game: PropTypes.object,
-  isLoading: PropTypes.bool
+  isLoading: PropTypes.bool,
 }
 
 GameCard.defaultProps = {
-  game: {}
+  game: {},
 }
