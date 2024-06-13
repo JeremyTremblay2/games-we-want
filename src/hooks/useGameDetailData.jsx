@@ -4,6 +4,7 @@ import {
   API_GAME_DETAIL,
   API_SCREENSHOTS_URL,
   API_COMPANIES_URL,
+  API_PLATFORMS_URL,
 } from "../utils/constants"
 import { enqueueSnackbar } from "notistack"
 
@@ -63,8 +64,12 @@ const useGameDetailData = gameId => {
       const game = {
         name: data.name,
         description: data.summary,
+        releaseDate: data.firstReleaseDate,
+        url: data.url,
+        rating: data.rating,
         screenshots: screenshots,
         companies: [],
+        platforms: [],
       }
 
       try {
@@ -96,9 +101,29 @@ const useGameDetailData = gameId => {
           }
         }
       } catch (error) {
-        console.warn("Failed to get the companies for the game", gameId)
+        console.warn("Failed to get the platforms for the game", gameId)
       }
 
+      try {
+        const platformResult = await fetch(`${API_BASE_URL}${API_PLATFORMS_URL}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("jwt"),
+          },
+          body: JSON.stringify(data.platforms.ids),
+        })
+        const platformResultsData = await platformResult.json()
+        for (let i = 0; i < platformResultsData.length; i++) {
+          game.platforms.push({
+            name: platformResultsData[i].name,
+            category: platformResultsData[i].category,
+            url: platformResultsData[i].url,
+          })
+        }
+      } catch (error) {
+        console.warn("Failed to get the platforms for the game", gameId)
+      }
       setGame(game)
     }
 
