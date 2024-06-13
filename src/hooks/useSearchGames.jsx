@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { API_BASE_URL, API_SEARCH_URL } from "../utils/constants"
 
-const useSearchGames = ({ searchTerm, isSearching, setIsSearching }) => {
+const useSearchGames = ({ searchTerm, isSearching, setIsSearching, rowsPerPage, page }) => {
   const [data, setData] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
 
@@ -11,7 +11,7 @@ const useSearchGames = ({ searchTerm, isSearching, setIsSearching }) => {
         const jwt = localStorage.getItem("jwt")
 
         const result = await fetch(
-          `${API_BASE_URL}${API_SEARCH_URL}?term=${searchTerm}&pageSize=10&page=1`,
+          `${API_BASE_URL}${API_SEARCH_URL}?term=${searchTerm}&pageSize=${rowsPerPage}&page=${page}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -46,7 +46,7 @@ const useSearchGames = ({ searchTerm, isSearching, setIsSearching }) => {
     }
     setIsLoading(false)
     setIsSearching(false)
-  }, [isSearching])
+  }, [isSearching, rowsPerPage, page])
 
   return { data: data, isLoading: isLoading }
 }
