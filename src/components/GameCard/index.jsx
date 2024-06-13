@@ -1,19 +1,31 @@
 import PropTypes from "prop-types"
-import * as React from "react"
-import { Link } from "react-router-dom"
-import Card from "@mui/material/Card"
-import CardContent from "@mui/material/CardContent"
-import CardMedia from "@mui/material/CardMedia"
-import Typography from "@mui/material/Typography"
 
-import "./index.css"
 import View from "./View.jsx"
-import useGameCoverImage from "../../hooks/useGameCoverImage.jsx"
+import useGameCoverImage from "../../hooks/useGameCoverImage"
+import { UserContext } from "../UserContext/index.jsx"
+import { addFavorite, removeFavorite } from "../../services/favorites-games"
+import "./index.css"
+import { useContext } from "react"
 
 const GameCard = ({ game, isLoading }) => {
   const gameCover = useGameCoverImage({
     gameId: game?.id,
   })
+
+  const { favoriteGames, setFavoriteGames, userInfo } = useContext(UserContext)
+  const isFavorite = favoriteGames?.some(favoriteGame => favoriteGame.id === game.id)
+
+  const handleFavorite = async e => {
+    e.preventDefault()
+    if (!isFavorite) {
+      const isAdded = await addFavorite(game.id)
+      if (isAdded) setFavoriteGames(prev => [...prev, game])
+    } else {
+      const isRemoved = await removeFavorite(game.id)
+      if (isRemoved)
+        setFavoriteGames(prev => prev.filter(favoriteGame => favoriteGame.id !== game.id))
+    }
+  }
 
   return (
     <View
@@ -21,6 +33,9 @@ const GameCard = ({ game, isLoading }) => {
       image={gameCover.image}
       isImageLoading={gameCover.isLoading}
       isLoading={isLoading}
+      isFavorite={isFavorite}
+      handleFavorite={handleFavorite}
+      userInfo={userInfo}
     />
   )
 }

@@ -1,9 +1,9 @@
 .cards-list {
-    width: 100%;
-    justify-content: center;
-    justify-items: center;
-    display: flex;
-    flex-wrap: wrap;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 25px;
+  width: 100%;
+  justify-content: center;
+  justify-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
 }
