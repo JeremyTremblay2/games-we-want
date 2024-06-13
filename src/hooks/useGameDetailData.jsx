@@ -81,7 +81,6 @@ const useGameDetailData = gameId => {
               }
             )
             const companyResultsData = await companyResult.json()
-            console.log("companyResultsData:", companyResultsData)
             game.companies.push({
               name: companyResultsData.name,
               description: companyResultsData.description,
