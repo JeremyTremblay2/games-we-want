@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
-import { API_BASE_URL, API_GAME_DETAIL, API_SCREENSHOTS_URL } from "../utils/constants"
+import PropTypes from "prop-types"
 import { enqueueSnackbar } from "notistack"
+import { API_BASE_URL, API_GAME_DETAIL, API_SCREENSHOTS_URL } from "../utils/constants"
 
-const useGameDetailData = gameId => {
+const useGameDetailData = (gameId = 0) => {
   const [game, setGame] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
 
@@ -70,3 +71,7 @@ const useGameDetailData = gameId => {
 }
 
 export default useGameDetailData
+
+useGameDetailData.propTypes = {
+  gameId: PropTypes.number,
+}

@@ -1,9 +1,16 @@
 import { useEffect, useState } from "react"
+import PropTypes from "prop-types"
 import { API_BASE_URL, API_SEARCH_URL } from "../utils/constants"
 
-const useSearchGames = ({ searchTerm, isSearching, setIsSearching, rowsPerPage, page }) => {
+const useSearchGames = ({
+    searchTerm = "",
+    isSearching = false,
+    setIsSearching,
+    rowsPerPage = 10,
+    page = 1
+  }) => {
   const [data, setData] = useState(null)
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -15,8 +22,8 @@ const useSearchGames = ({ searchTerm, isSearching, setIsSearching, rowsPerPage, 
           {
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${jwt}`,
-            },
+              Authorization: `Bearer ${jwt}`
+            }
           }
         )
 
@@ -31,7 +38,7 @@ const useSearchGames = ({ searchTerm, isSearching, setIsSearching, rowsPerPage, 
           gamesList.push({
             id: data[i].id,
             firstReleaseDate: data[i].firstReleaseDate,
-            name: data[i].name,
+            name: data[i].name
           })
         }
         setData(gamesList)
@@ -42,9 +49,8 @@ const useSearchGames = ({ searchTerm, isSearching, setIsSearching, rowsPerPage, 
 
     if (searchTerm) {
       setIsLoading(true)
-      fetchData()
+      fetchData().then(() => setIsLoading(false))
     }
-    setIsLoading(false)
     setIsSearching(false)
   }, [isSearching, rowsPerPage, page])
 
@@ -52,3 +58,11 @@ const useSearchGames = ({ searchTerm, isSearching, setIsSearching, rowsPerPage, 
 }
 
 export default useSearchGames
+
+useSearchGames.propTypes = {
+  searchTerm: PropTypes.string,
+  isSearching: PropTypes.bool,
+  setIsSearching: PropTypes.func,
+  rowsPerPage: PropTypes.number,
+  page: PropTypes.number
+}

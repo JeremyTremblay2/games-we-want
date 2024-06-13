@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { enqueueSnackbar } from "notistack"
 import { API_BASE_URL, API_USER_DELETE, API_USER_INFO } from "../utils/constants.js"
-import { handleDisconnect } from "./useAuthenticate.jsx"
 
 const useUserData = () => {
   const [userInfo, setUserInfo] = useState(undefined)

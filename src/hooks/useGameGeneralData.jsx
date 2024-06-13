@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
-import { API_TOP_10_GAMES_URL, API_SCREENSHOTS_URL, API_BASE_URL } from "../utils/constants"
-import game_image from "../assets/images/game_image_placeholder.png"
+import PropTypes from "prop-types"
+import { API_TOP_10_GAMES_URL, API_BASE_URL } from "../utils/constants"
 
-const useGameGeneralData = ({ rowsPerPage, page }) => {
+const useGameGeneralData = ({ rowsPerPage = 10, page = 1 }) => {
   const [topGames, setTopGames] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
@@ -41,3 +41,8 @@ const useGameGeneralData = ({ rowsPerPage, page }) => {
 }
 
 export default useGameGeneralData
+
+useGameGeneralData.propTypes = {
+  rowsPerPage: PropTypes.number,
+  page: PropTypes.number,
+}
