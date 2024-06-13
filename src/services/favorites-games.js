@@ -1,13 +1,13 @@
 import { API_BASE_URL, API_ADD_FAVORITE, API_REMOVE_FAVORITE } from "../utils/constants"
 import { enqueueSnackbar } from "notistack"
 
-export const addFavorite = async (gameId) => {
+export const addFavorite = async gameId => {
   const response = await fetch(`${API_BASE_URL}${API_ADD_FAVORITE}/${gameId}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.getItem("jwt")}`
-    }
+      Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+    },
   })
   switch (response.status) {
     case 204:
@@ -28,13 +28,13 @@ export const addFavorite = async (gameId) => {
   }
 }
 
-export const removeFavorite = async (gameId) => {
+export const removeFavorite = async gameId => {
   const response = await fetch(`${API_BASE_URL}${API_REMOVE_FAVORITE}/${gameId}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.getItem("jwt")}`
-    }
+      Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+    },
   })
   console.log(response)
   switch (response.status) {

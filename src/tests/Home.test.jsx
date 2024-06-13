@@ -8,11 +8,13 @@ import { MemoryRouter } from "react-router-dom"
 
 describe("Home", () => {
   test("Render the Home page", () => {
-    render(<MemoryRouter>
-      <UserContext.Provider value={{ userInfo: null, favoritesGame: [] }}>
-        <Home />
-      </UserContext.Provider>
-    </MemoryRouter>)
+    render(
+      <MemoryRouter>
+        <UserContext.Provider value={{ userInfo: null, favoritesGame: [] }}>
+          <Home />
+        </UserContext.Provider>
+      </MemoryRouter>
+    )
 
     const topGamesElement = screen.getByText("Top Games")
     expect(topGamesElement).toBeInTheDocument()
