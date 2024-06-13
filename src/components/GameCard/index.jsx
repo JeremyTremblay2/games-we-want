@@ -1,14 +1,9 @@
 import PropTypes from "prop-types"
 import * as React from "react"
-import { Link } from "react-router-dom"
-import Card from "@mui/material/Card"
-import CardContent from "@mui/material/CardContent"
-import CardMedia from "@mui/material/CardMedia"
-import Typography from "@mui/material/Typography"
 
-import "./index.css"
 import View from "./View.jsx"
-import useGameCoverImage from "../../hooks/useGameCoverImage.jsx"
+import useGameCoverImage from "../../hooks/useGameCoverImage"
+import "./index.css"
 
 const GameCard = ({ game, isLoading }) => {
   const gameCover = useGameCoverImage({
