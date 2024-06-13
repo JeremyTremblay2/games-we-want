@@ -7,10 +7,10 @@ import CardMedia from "@mui/material/CardMedia"
 import Typography from "@mui/material/Typography"
 import { CardActions, IconButton, Skeleton } from "@mui/material"
 import FavoriteIcon from "@mui/icons-material/Favorite"
-import { red } from '@mui/material/colors'
+import { red } from "@mui/material/colors"
 import "./index.css"
 
-const View = ({ game, isLoading, image, isImageLoading, isFavorite, handleFavorite }) => (
+const View = ({ game, isLoading, image, isImageLoading, isFavorite, handleFavorite, userInfo }) => (
   <Link to={`/game/${game.id}`} style={{ textDecoration: "none", width: "300px" }}>
     <Card
       sx={{
@@ -21,8 +21,8 @@ const View = ({ game, isLoading, image, isImageLoading, isFavorite, handleFavori
         transition: "all 0.3s",
         "&:hover": {
           transform: "scale(1.02)",
-          boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.2)"
-        }
+          boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.2)",
+        },
       }}
     >
       {isImageLoading ? (
@@ -36,7 +36,7 @@ const View = ({ game, isLoading, image, isImageLoading, isFavorite, handleFavori
             height: "400px",
             objectFit: "cover",
             borderTopLeftRadius: "16px",
-            borderTopRightRadius: "16px"
+            borderTopRightRadius: "16px",
           }}
         />
       )}
@@ -49,7 +49,7 @@ const View = ({ game, isLoading, image, isImageLoading, isFavorite, handleFavori
             fontWeight: "bold",
             whiteSpace: "nowrap",
             overflow: "hidden",
-            textOverflow: "ellipsis"
+            textOverflow: "ellipsis",
           }}
         >
           {isLoading ? <Skeleton animation="wave" /> : game.name}
@@ -60,20 +60,24 @@ const View = ({ game, isLoading, image, isImageLoading, isFavorite, handleFavori
           textAlign="right"
           sx={{
             fontStyle: "italic",
-            color: "gray"
+            color: "gray",
           }}
         >
-
           {isLoading ? (
             <Skeleton width={"50%"} animation="wave" sx={{ marginLeft: "auto" }} />
+          ) : game.firstReleaseDate ? (
+            `Released on ${dayjs(game.firstReleaseDate).format("YYYY-MM-DD")}`
           ) : (
-            game.firstReleaseDate ?
-            `Released on ${dayjs(game.firstReleaseDate).format("YYYY-MM-DD")}` : " "
+            " "
           )}
         </Typography>
-        {!isLoading && (
-          <IconButton color={isFavorite ? "error" : ""} onClick={handleFavorite} aria-label="add to favorites"
-                      sx={{ position: "absolute", left: "10px", bottom: "10px" }}>
+        {userInfo && !isLoading && (
+          <IconButton
+            color={isFavorite ? "error" : ""}
+            onClick={handleFavorite}
+            aria-label="add to favorites"
+            sx={{ position: "absolute", left: "10px", bottom: "10px" }}
+          >
             <FavoriteIcon />
           </IconButton>
         )}
@@ -90,7 +94,8 @@ View.propTypes = {
   image: PropTypes.string,
   isImageLoading: PropTypes.bool,
   isFavorite: PropTypes.bool,
-  handleFavorite: PropTypes.func
+  handleFavorite: PropTypes.func,
+  userInfo: PropTypes.object,
 }
 
 View.defaultProps = {
@@ -99,6 +104,6 @@ View.defaultProps = {
   image: "",
   isImageLoading: false,
   isFavorite: false,
-  handleFavorite: () => {
-  }
+  handleFavorite: () => {},
+  userInfo: {},
 }
