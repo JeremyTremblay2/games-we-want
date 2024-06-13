@@ -9,8 +9,17 @@ import { CardActions, IconButton, Skeleton } from "@mui/material"
 import FavoriteIcon from "@mui/icons-material/Favorite"
 import { red } from "@mui/material/colors"
 import "./index.css"
+import { handleFavorite } from "../../services/favorites-games"
 
-const View = ({ game, isLoading, image, isImageLoading, isFavorite, handleFavorite, userInfo }) => (
+const View = ({
+  game = {},
+  isLoading = false,
+  image = "",
+  isImageLoading = false,
+  isFavorite = false,
+  setFavoriteGames,
+  userInfo = {},
+}) => (
   <Link to={`/game/${game.id}`} style={{ textDecoration: "none", width: "300px" }}>
     <Card
       data-testid="GameCard"
@@ -75,7 +84,7 @@ const View = ({ game, isLoading, image, isImageLoading, isFavorite, handleFavori
         {userInfo && !isLoading && (
           <IconButton
             color={isFavorite ? "error" : ""}
-            onClick={handleFavorite}
+            onClick={e => handleFavorite(e, game, isFavorite, setFavoriteGames)}
             aria-label="add to favorites"
             sx={{ position: "absolute", left: "10px", bottom: "10px" }}
           >
@@ -95,16 +104,6 @@ View.propTypes = {
   image: PropTypes.string,
   isImageLoading: PropTypes.bool,
   isFavorite: PropTypes.bool,
-  handleFavorite: PropTypes.func,
+  setFavoriteGames: PropTypes.func,
   userInfo: PropTypes.object,
-}
-
-View.defaultProps = {
-  game: {},
-  isLoading: false,
-  image: "",
-  isImageLoading: false,
-  isFavorite: false,
-  handleFavorite: () => {},
-  userInfo: {},
 }

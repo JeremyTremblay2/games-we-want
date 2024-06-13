@@ -6,7 +6,7 @@ import { useRenewToken } from "../../hooks/useAuthenticate"
 export const UserContext = createContext()
 let tokenTimeout
 
-export function UserContextProvider({ children }) {
+export function UserContextProvider({ children = null }) {
   const { userInfo, setUserInfo, isLoading, setRefreshUser } = useUserData()
   const [favoriteGames, setFavoriteGames] = useState([])
 
@@ -61,8 +61,4 @@ export function useFavoriteGames() {
 
 UserContextProvider.propTypes = {
   children: PropTypes.node.isRequired,
-}
-
-UserContextProvider.defaultProps = {
-  children: null,
 }

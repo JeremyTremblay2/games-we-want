@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
 import { useState } from "react"
 
-const GameDescription = ({ description }) => {
+const GameDescription = ({ description = "" }) => {
   const [expanded, setExpanded] = useState(description.split("\n").length <= 5)
   return (
     <>
@@ -18,9 +18,8 @@ const GameDescription = ({ description }) => {
             expandIcon={<ExpandMoreIcon />}
             aria-controls="game-description-content"
             id="game-description-header"
-            style={{ fontSize: "20px" }}
           >
-            Description
+            <h2 style={{ margin: 0, padding: 0 }}>Description</h2>
           </AccordionSummary>
           <AccordionDetails>
             <Typography>{description}</Typography>
@@ -35,8 +34,4 @@ export default GameDescription
 
 GameDescription.propTypes = {
   description: PropTypes.string,
-}
-
-GameDescription.defaultProps = {
-  description: "",
 }

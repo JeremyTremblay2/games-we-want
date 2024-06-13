@@ -7,7 +7,7 @@ import Home from "../Home/index.jsx"
 import GameDetails from "../GameDetails/index.jsx"
 import Login from "../Login/index.jsx"
 import PrivateRoute from "./PrivateRoute.jsx"
-import { UserContextProvider } from "../UserContext/index.jsx"
+import { UserContextProvider } from "../UserContext"
 import Profile from "../Profile/index.jsx"
 import { LoadingContextProvider } from "../LoadingContext/index"
 import { SearchContextProvider } from "../SearchContext/index"
@@ -29,7 +29,7 @@ const router = createBrowserRouter([
         path: "/search",
         element: (
           <PrivateRoute>
-            <Search />,
+            <Search />
           </PrivateRoute>
         ),
       },

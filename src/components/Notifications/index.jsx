@@ -4,7 +4,7 @@ import { styled } from "@mui/material"
 import { SnackbarProvider } from "notistack"
 import { MaterialDesignContent } from "notistack"
 
-const NotificationsProvider = ({ prefersDarkMode }) => {
+const NotificationsProvider = ({ prefersDarkMode = true }) => {
   // const { notifications } = useSelector((state) => state.notifications);
   const notifications = []
   const StyledMaterialDesignContent = styled(MaterialDesignContent)(({ theme }) => ({
@@ -36,8 +36,4 @@ export default NotificationsProvider
 
 NotificationsProvider.propTypes = {
   prefersDarkMode: PropTypes.bool,
-}
-
-NotificationsProvider.defaultProps = {
-  prefersDarkMode: false,
 }

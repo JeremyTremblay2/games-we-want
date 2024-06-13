@@ -1,7 +1,7 @@
 import { Rating, Typography } from "@mui/material"
 import PropTypes from "prop-types"
 
-const GameRating = ({ rating }) => {
+const GameRating = ({ rating = 0 }) => {
   return (
     <>
       {rating && (
@@ -33,8 +33,4 @@ export default GameRating
 
 GameRating.propTypes = {
   rating: PropTypes.number,
-}
-
-GameRating.defaultProps = {
-  rating: 0,
 }
