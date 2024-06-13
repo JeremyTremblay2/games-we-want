@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
+import PropTypes from "prop-types"
 import { API_BASE_URL, API_COVER_URL } from "../utils/constants"
 import placeholderImage from "../assets/images/game_image_placeholder.png"
 
-const useGameCoverImage = ({ gameId }) => {
+const useGameCoverImage = ({ gameId = 0 }) => {
   const [gameCoverImage, setGameCoverImage] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
 
@@ -36,3 +37,7 @@ const useGameCoverImage = ({ gameId }) => {
 }
 
 export default useGameCoverImage
+
+useGameCoverImage.propTypes = {
+  gameId: PropTypes.number,
+}

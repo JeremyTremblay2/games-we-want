@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react"
 import { BrowserRouter } from "react-router-dom"
-import GameCard from "../components/GameCard"
+import GameCard from "../components/GameCard/View"
 
 test("renders game name", () => {
   const game = {

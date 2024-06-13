@@ -1,4 +1,4 @@
-import GameCard from "../GameCard/index.jsx"
+import GameCard from "../GameCard"
 import PropTypes from "prop-types"
 
 
